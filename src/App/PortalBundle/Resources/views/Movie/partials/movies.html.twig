@@ -1,0 +1,27 @@
+<div class="container">
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>{{ 'film.titre' | trans }}</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for movie in movies %}
+            <tr>
+                <td>{{ movie.title }}</td>
+                <td><a href="{{ path('movie_show', { 'id': movie.id }) }}">{{ 'voir' | trans({}, 'divers') }}</a></td>
+                {% if is_granted('ROLE_EDITOR') and is_granted('edit', movie) %}
+                    <td><a href="{{ path('movie_edit', { 'id': movie.id }) }}">{{ 'modifier' | trans({}, 'divers') }}</a></td>
+                {% endif %}
+                {% if is_granted('ROLE_ADMIN') %}
+                    <td><a href="{{ path('movie_delete', { 'id': movie.id }) }}">{{ 'supprimer' | trans({}, 'divers') }}</a></td>
+                {% endif %}
+            </tr>
+        {% else %}
+            <tr>
+                <td>{{ 'film.aucun'|trans }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>

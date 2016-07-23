@@ -1,0 +1,12 @@
+{% extends "AppPortalBundle::layout.html.twig" %}
+
+{% block title %}{{ 'Register' }}{% endblock %}
+
+{% form_theme form "bootstrap_3_horizontal_layout.html.twig" %}
+
+{% block content %}
+    <div style="text-align: center">
+        <h1>{{ 'user.registration.label' | trans }}</h1>
+    </div>
+    {{ form(form, { attr: { novalidate: 'novalidate' } }) }}
+{% endblock %}

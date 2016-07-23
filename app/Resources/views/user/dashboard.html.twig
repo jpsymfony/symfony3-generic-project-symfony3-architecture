@@ -1,0 +1,12 @@
+{% extends "AppPortalBundle::layout.html.twig" %}
+
+{% block title 'Member Area' %}
+
+{% block content %}
+    <div style="text-align: center">
+        <h1>Dashboard</h1>
+    </div>
+    <p>
+        Welcome {{ app.user.username }}
+    </p>
+{% endblock %}

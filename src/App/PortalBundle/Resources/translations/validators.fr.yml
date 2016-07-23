@@ -1,0 +1,3 @@
+contact.firstname.notblank: Le prénom est obligatoire
+contact.lastname.notblank: Le nom de famille est obligatoire
+contact.email.notblank: L'email est obligatoire

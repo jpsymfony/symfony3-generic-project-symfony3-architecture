@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{% block title %}Portal{% endblock %}</title>
+
+        {% stylesheets filter='cssrewrite'
+            'css/main.css'
+            'css/custom.css'
+            'css/bootstrap-multiselect.css'
+            'bundles/appportal/css/portal.css'
+        filter='yui_css' %}
+        <link rel="stylesheet" href="{{ asset_url }}">
+        {% endstylesheets %}
+
+        {% block stylesheets %}
+            <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
+            <link rel="stylesheet" href="{{ asset('css/bootstrap-theme.min.css') }}">
+            <link rel="stylesheet" href="{{ asset('js/jquery-ui/jquery-ui.min.css') }}">
+            <link rel="stylesheet" href="{{ asset('bundles/appcore/select2/css/select2.min.css') }}">
+        {% endblock %}
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
+    </head>
+
+    <body>
+        {% block body %}{% endblock %}
+
+        {% block javascripts %}
+            <script src="{{ asset('js/jquery-1.11.1.min.js') }}"></script>
+            <script src="{{ asset('js/jquery-ui/jquery-ui.min.js') }}"></script>
+            <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+            <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+            <script src="{{ asset('js/bootstrap-multiselect.js') }}"></script>
+            <script src="{{ asset('bundles/appcore/tinymce/tinymce.min.js') }}"></script>
+            <script src="{{ asset('bundles/appcore/select2/js/select2.full.min.js') }}"></script>
+            <script src="{{ asset('bundles/tetranzselect2entity/js/select2entity.js') }}"></script>
+        {% endblock %}
+
+        {% javascripts
+        'js/main.js'
+        'js/fos_js_routes.js'
+        filter='yui_js' %}
+        <script src="{{ asset_url }}"></script>
+        {% endjavascripts %}
+    </body>
+</html>

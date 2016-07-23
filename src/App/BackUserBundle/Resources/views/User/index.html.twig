@@ -1,0 +1,75 @@
+{% extends 'base_admin.html.twig' %}
+
+{% block user_list_active %}current{% endblock %}
+
+{% block body_admin -%}
+<h2>Users list</h2>
+
+ <ul class="shortcut-buttons-set"> <!-- Replace the icons URL's with your own -->
+
+        <li>
+            <a class="shortcut-button" href="{{ path('fos_user_registration_register') }}">
+                <span>
+                    <img src="{{ asset('bundles/appadmin/images/icons/paper_content_pencil_48.png') }}" alt="icon" /><br />
+                    New Admin User
+                </span>
+            </a>
+        </li>
+</ul><!-- End .shortcut-buttons-set -->
+
+<div class="clear"></div> <!-- End .clear -->
+<div class="content-box"><!-- Start Content Box -->
+    <div class="content-box-header">
+
+        <ul class="content-box-tabs">
+            <li><a href="#tab1" class="default-tab">Table</a></li> <!-- href must be unique and match the id of target div -->
+        </ul>
+
+        <div class="clear"></div>
+
+    </div> <!-- End .content-box-header -->
+
+    <div class="content-box-content">
+        <div class="tab-content default-tab" id="tab1">
+
+            {% for flashMessage in app.session.flashbag.get('success') %}
+                    <div class="notification success png_bg">
+                        <div>{{ flashMessage }}</div>
+                    </div>
+            {% endfor %}
+
+            {% for flashMessage in app.session.flashbag.get('error') %}
+                <div class="notification error png_bg">
+                    <div>{{ flashMessage }}</div>
+                </div>
+            {% endfor %}
+            
+            <div class="clear"></div>
+            <table class="record_properties">
+                <thead>
+                    <tr>
+                        <th>User</th>
+                        <th>Email</th>
+                        {% if is_granted('ROLE_SUPER_ADMIN') %}
+                            <th>Actions</th>
+                        {% endif %}
+                    </tr>
+                </thead>
+                <tbody>
+                {% for user in users %}
+                    <tr>
+                        <td>{{ user.username }}</td>
+                        <td>{{ user.email }}</td>
+                        {% if is_granted('ROLE_SUPER_ADMIN') %}
+                            <td>
+                                <a href="{{ path('user_delete', { 'id': user.id }) }}" onclick="return confirm('Are you sure you want to delete the user {{ user.username }} ?')" title="Delete"><img src="{{ asset('bundles/appadmin/images/icons/cross.png') }}" alt="Delete" /></a>
+                            </td>
+                        {% endif %}
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div> <!-- End .content-box-content -->
+</div> <!-- End .content-box -->
+{% endblock %}

@@ -1,0 +1,91 @@
+services:
+    app_portal.abstract_movie.form.handler.strategy:
+        abstract:  true
+        class: App\PortalBundle\Form\Handler\Movie\AbstractMovieFormHandlerStrategy
+        calls:
+           - [setMovieManager, ['@app_portal.movie.manager']]
+           - [setFormFactory, ['@form.factory']]
+           - [setRouter, ['@router']]
+           - [setTranslator, ['@translator']]
+
+    app_portal.movie.form.handler:
+        class: App\PortalBundle\Form\Handler\Movie\MovieFormHandler
+        calls:
+            - [setManagerService, ['@app_portal.manager_service']]
+            - [setNewMovieFormHandlerStrategy, ['@app_portal.new_movie.form.handler.strategy']]
+            - [setUpdateMovieFormHandlerStrategy, ['@app_portal.update_movie.form.handler.strategy']]
+
+    app_portal.new_movie.form.handler.strategy:
+        class: App\PortalBundle\Form\Handler\Movie\NewMovieFormHandlerStrategy
+        parent: app_portal.abstract_movie.form.handler.strategy
+        arguments:
+            - "@security.token_storage"
+
+    app_portal.update_movie.form.handler.strategy:
+        class: App\PortalBundle\Form\Handler\Movie\UpdateMovieFormHandlerStrategy
+        parent: app_portal.abstract_movie.form.handler.strategy
+        arguments:
+            - "@app_portal.hashtag.manager"
+            - "@security.authorization_checker"
+
+    app_portal.movie_search.form:
+        class: App\PortalBundle\Form\Type\MovieFilterType
+        tags:
+            - { name: form.type, alias: app_portal_movie_filter }
+
+    app_portal.movie.form.type:
+        class: App\PortalBundle\Form\Type\MovieType
+        arguments:
+            - "@app_portal.movie.manager"
+        tags:
+            - { name: form.type, alias: app_portal_movie }
+
+
+    app_portal.actor.form.handler:
+        class: App\PortalBundle\Form\Handler\Actor\ActorFormHandler
+        calls:
+           - [setNewActorFormHandlerStrategy, ['@app_portal.new_actor.form.handler.strategy']]
+           - [setUpdateActorFormHandlerStrategy, ['@app_portal.update_actor.form.handler.strategy']]
+
+    app_portal.new_actor.form.handler.strategy:
+        class: App\PortalBundle\Form\Handler\Actor\NewActorFormHandlerStrategy
+        arguments:
+            - "@translator"
+            - "@app_portal.actor.manager"
+            - "@form.factory"
+            - "@router"
+
+    app_portal.update_actor.form.handler.strategy:
+        class: App\PortalBundle\Form\Handler\Actor\UpdateActorFormHandlerStrategy
+        arguments:
+            - "@translator"
+            - "@app_portal.actor.manager"
+            - "@form.factory"
+            - "@router"
+
+    app_portal.actor_search.form:
+            class: App\PortalBundle\Form\Type\ActorSearchFormType
+            tags:
+                - { name: form.type, alias: actor_search }
+
+
+    app_portal.request_contact.handler:
+        class: App\PortalBundle\Form\Handler\Contact\ContactFormHandler
+        arguments: ['@app_portal.contact.manager']
+
+    app_portal.contact.form.type:
+            class: App\PortalBundle\Form\Type\ContactType
+            tags:
+                - { name: form.type, alias: app_portal_contacttype }
+
+
+    app_portal.hashtag.form:
+        class: App\PortalBundle\Form\Type\HashTagCollectionType
+        arguments: ["%app_portal.max_hashtag_limit%"]
+        tags:
+            - { name: form.type, alias: hashtags }
+
+    app_portal.hashtag.form.type:
+        class: App\PortalBundle\Form\Type\HashTagType
+        tags:
+            - { name: form.type, alias: app_portal_hashtag }

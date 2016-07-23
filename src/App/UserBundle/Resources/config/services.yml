@@ -1,0 +1,7 @@
+services:
+    app_user.movie_voter:
+        class: App\UserBundle\Security\MovieVoter
+        arguments: ['@security.access.decision_manager']
+        public:     false
+        tags:
+            - { name: security.voter }

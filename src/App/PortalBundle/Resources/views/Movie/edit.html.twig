@@ -1,0 +1,32 @@
+{% extends '@AppPortal/layout.html.twig' %}
+
+{% form_theme form '@AppPortal/Movie/form_theme.html.twig' 'bootstrap_3_horizontal_layout.html.twig' %}
+
+{% block active_movies %}active{% endblock %}
+
+{% block title %}
+    {% if movie.id %}
+        {{ 'film.modifier'|trans({'%titre%': movie.title}) }}
+    {% else %}
+        {{ 'film.ajouter'|trans }}
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+    {{ form_start(form, { attr: { novalidate: 'novalidate' } }) }}
+    {{ form_row(form.title) }}
+    {{ form_row(form.description) }}
+    {{ form_row(form.image) }}
+    {{ form_row(form.category) }}
+    {{ form_row(form.actors) }}
+
+    {% if form.hashTags is defined %}
+        {{ form_row(form.hashTags) }}
+    {% endif %}
+
+    {{ form_row(form.releasedAt) }}
+    {{ form_end(form) }}
+
+<p style="text-align: center"><a href="{{ path('movie_list') }}">{{ 'film.liste.retour'|trans }}</a></p>
+
+{% endblock %}

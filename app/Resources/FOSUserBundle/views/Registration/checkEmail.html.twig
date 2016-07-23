@@ -1,0 +1,7 @@
+{% extends "base_admin.html.twig" %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block body_admin %}
+    <p>{{ 'registration.check_email'|trans({'%email%': user.email}) }}</p>
+{% endblock body_admin %}

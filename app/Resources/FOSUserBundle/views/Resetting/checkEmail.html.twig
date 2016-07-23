@@ -1,0 +1,24 @@
+{% extends "base_admin.html.twig" %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block body_admin %}
+
+<h2>Resetting Password</h2>
+
+<div class="clear"></div> <!-- End .clear -->
+<div class="content-box"><!-- Start Content Box -->
+    <div class="content-box-header">
+
+        <div class="clear"></div>
+
+    </div> <!-- End .content-box-header -->
+
+    <div class="content-box-content">
+        <div class="notification success png_bg">
+            <div>{{ 'resetting.check_email'|trans({'%email%': email}) }}</div>
+        </div>
+    </div> <!-- End .content-box-content -->
+</div> <!-- End .content-box -->
+
+{% endblock %}

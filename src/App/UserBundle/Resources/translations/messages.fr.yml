@@ -1,0 +1,32 @@
+user:
+    connexion:
+            new_password: Nouveau mot de passe
+            confirmation: Répétez le mot de passe
+            label: Connexion
+            username: Identifiant
+            password: Mot de passe
+            password_forgotten: Mot de passe oublié
+    registration:
+            label: Enregistrement
+            username: Identifiant
+            email: Email
+            password: Mot de passe
+            confirm: Répéter le mot de passe
+            register: Envoyer
+    change_password:
+            title: Changement de mot de passe
+            old_password: Ancien mot de passe
+            new_password: Nouveau mot de passe
+            repeat_new_password: Répéter le nouveau mot de passe
+            button: Envoyer
+    reset_password:
+            identifier: Identifiant
+            button: Confirmer le changement
+            title: Réinitialisation du mot de passe
+            new_password: Nouveau mot de passe
+            repeat_new_password: Répéter le nouveau mot de passe
+            successful_reset: Your password has been resetted. You can login now.
+    request_password:
+            button: Envoyer la demande
+            title: Demande de changement de mot de passe
+            mail_sent: Un email vient de vous être envoyé pour modifier votre mot de passe

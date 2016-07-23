@@ -1,0 +1,95 @@
+# To get started with security, check out the documentation:
+# http://symfony.com/doc/current/book/security.html
+security:
+    encoders:
+        FOS\UserBundle\Model\UserInterface: bcrypt
+        App\UserBundle\Entity\User: sha512
+
+    role_hierarchy:
+        ROLE_VISITOR:     ROLE_USER
+        ROLE_EDITOR:      ROLE_VISITOR
+        ROLE_ADMIN:       ROLE_EDITOR
+        ROLE_SUPER_ADMIN: [ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
+
+    providers:
+        database_users:
+            entity: { class: AppUserBundle:User, property: username }
+        fos_userbundle:
+            id: fos_user.user_provider.username
+
+    firewalls:
+        # disables authentication for assets and the profiler, adapt it according to your needs
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+
+        bo:
+            pattern: ^/back
+            form_login:
+                provider: fos_userbundle
+                csrf_token_generator: security.csrf.token_manager
+                login_path:  /back/login
+                check_path:  /back/login_check
+            logout:
+                path:        /back/logout
+                target:      /back
+                invalidate_session: false
+            anonymous:    ~
+            remember_me:
+                secret:      "%secret%"
+                lifetime: 31536000 # 365 jours en secondes
+                path:     /back
+                domain:   ~ # Prend la valeur par défaut du domaine courant depuis $_SERVER
+
+        fo:
+            # this firewall applies to all URLs
+            pattern: ^/
+
+            # but the firewall does not require login on every page
+            # denying access is done in access_control or in your controllers
+            anonymous: true
+
+            # allows a role to be able to switch
+            # http://symfony.com/doc/2.8/cookbook/security/impersonating_user.html
+            switch_user: { role: ROLE_SUPER_ADMIN, parameter: _switch_user }
+
+            # This allows the user to login by submitting a username and password
+            # Reference: http://symfony.com/doc/current/cookbook/security/form_login_setup.html
+            form_login:
+                provider: database_users
+                # The route name that the login form submits to
+                check_path: security_login_check
+                # The name of the route where the login form lives
+                # When the user tries to access a protected page, they are redirected here
+                login_path: security_login_form
+                # Secure the login form against CSRF
+                # Reference: http://symfony.com/doc/current/cookbook/security/csrf_in_login_form.html
+                csrf_token_generator: security.csrf.token_manager
+                failure_path: security_login_form
+                success_handler: security_authentication_success_handler
+                failure_handler: security_authentication_failure_handler
+                default_target_path: user_dashboard
+                always_use_default_target_path: true
+            logout:
+                # The route name the user can go to in order to logout
+                path: security_logout
+                # The name of the route to redirect to after logging out
+                target: homepage
+                handlers: [security_logout_success_handler]
+                invalidate_session: false
+
+    access_decision_manager:
+        #   affirmative (default) => This grants access as soon as there is one voter granting access;
+        #   consensus => This grants access if there are more voters granting access than denying;
+        #   unanimous => This only grants access once all voters grant access.
+        strategy: affirmative
+
+    access_control:
+        - { path: ^/account/register, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/account, roles: IS_AUTHENTICATED_FULLY }
+        - { path: ^/back/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/back/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/back/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/back, role: ROLE_SUPER_ADMIN }
+        - { path: ^/admin, roles: [ROLE_ADMIN, ROLE_EDITOR] }
+        - { path: ^/, role: IS_AUTHENTICATED_ANONYMOUSLY }

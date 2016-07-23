@@ -1,0 +1,61 @@
+{% block _movie_hashTags_row %}
+    {{- form_label(form) -}}
+    {% if prototype is defined %}
+        {%- set attr = attr|merge({'data-prototype': form_row(prototype) }) -%}
+    {% endif %}
+
+    {% if max_limit is defined %}
+        {%- set attr = attr|merge({'data-max-limit': max_limit }) -%}
+    {% endif %}
+
+    <table {{ block('widget_container_attributes') }}>
+        <thead>
+        <tr>
+            <th>-</th>
+            <th>Num</th>
+            <th>Name</th>
+        </tr>
+        <tr>
+            <td colspan="8">
+                <a href="#" class="button add_tag_link">{{ 'Rajouter un hashtag' | trans }}</a>
+            </td>
+        </tr>
+        </thead>
+        <tbody>
+        {{ block('form_rows') }}
+        </tbody>
+    </table>
+
+{% endblock %}
+
+{% block _movie_hashTags_entry_row %}
+    <tr>
+        <td>
+            <button type="button" class="close remove-line" aria-label="Remove">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </td>
+        <td>{{ form.vars.name + 1 }}</td>
+        <td>
+            {{ form_errors(form.name) }}
+            {{ form_widget(form.name) }}
+        </td>
+        {{ form_widget(form) }}
+    </tr>
+{% endblock %}
+
+{% block _movie_image_row %}
+    {{ form_errors(form) }}
+    {{ form_widget(form) }}
+    {% if form.vars.value.alt is defined and form.vars.value.alt is not null %}
+        <div class="form-group">
+            <label class="col-sm-2 control-label">{{ 'film.image' | trans }}</label>
+            <div class="col-sm-10">
+                <img
+                    src="{{ asset(form.vars.value.getWebPath | imagine_filter('movie_thumbnail')) }}"
+                    alt="{{ form.vars.value.alt }}"
+                />
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}

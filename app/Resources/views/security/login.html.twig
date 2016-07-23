@@ -1,0 +1,42 @@
+{% extends "AppPortalBundle::layout.html.twig" %}
+
+{% block title %}{{ 'Login' }}{% endblock %}
+
+{% block content %}
+    {% if error %}
+        <div class="alert alert-danger">
+            {{ error.messageKey|trans(error.messageData) }}
+        </div>
+    {% endif %}
+        <div style="text-align: center">
+            <h1>{{ 'user.connexion.label' | trans }}</h1>
+        </div>
+        <form action="{{ path('security_login_check') }}" method="post" class="form-horizontal">
+            <div id="registration_form">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label required">{{ 'user.connexion.username' | trans }}</label>
+                    <div class="col-sm-10">
+                        <input type="text" id="username" name="_username" value="{{ last_username }}" class="form-control"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label required">{{ 'user.connexion.password' | trans }}</label>
+                    <div class="col-sm-10">
+                        <input type="password" id="password" name="_password" class="form-control" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-2"></div>
+                    <div class="col-sm-10">
+                        <button type="submit" id="registration_form_Register" name="registration_form[Register]" class="btn btn-primary btn-lg btn-block btn">
+                            {{ 'menu.connexion' | trans }}
+                        </button>
+                    </div>
+                </div>
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}"/>
+            </div>
+        </form>
+        <div style="text-align:right">
+            <a href="{{ path('request_password') }}">{{ 'user.connexion.password_forgotten' | trans }}?</a>
+        </div>
+{% endblock %}

@@ -1,0 +1,16 @@
+services:
+   app_core.entity_management_guesser:
+      class: App\CoreBundle\Services\EntityManagementGuesser
+
+   app_core.collection_converter:
+      class: App\CoreBundle\Converter\CollectionConverter
+      arguments:
+          - "@doctrine"
+          - "@service_container"
+      tags:
+          - { name: request.param_converter, converter: project_collection_converter }
+
+   app_core.mailer_service:
+      class: App\CoreBundle\Services\MailerService
+      arguments:
+          - "@mailer"

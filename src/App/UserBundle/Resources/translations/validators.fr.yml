@@ -1,0 +1,3 @@
+change_password.old_password.minlength: Le mot de passe doit avoir au moins {{ limit }} caractères
+registration.password.minlength: Le mot de passe doit avoir au moins {{ limit }} caractères
+registration.email.notblank: L'email est obligatoire

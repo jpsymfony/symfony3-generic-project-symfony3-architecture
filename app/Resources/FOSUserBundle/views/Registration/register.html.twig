@@ -1,0 +1,10 @@
+{% extends "base_admin.html.twig" %}
+
+{% block body_admin %}
+<script>
+    jQuery(document).ready(function(){
+        jQuery("form").validationEngine();
+    }); 
+</script>
+{% include "FOSUserBundle:Registration:register_content.html.twig" %}
+{% endblock body_admin %}

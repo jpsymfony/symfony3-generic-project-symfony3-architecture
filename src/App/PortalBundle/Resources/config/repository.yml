@@ -1,0 +1,24 @@
+services:
+    app_portal.actor.repository:
+        class: App\PortalBundle\Repository\ActorRepository
+        factory: ["@doctrine.orm.default_entity_manager", getRepository]
+        arguments: ['App\PortalBundle\Entity\Actor']
+        lazy: true
+
+    app_portal.movie.repository:
+        class: App\PortalBundle\Repository\MovieRepository
+        factory: ["@doctrine.orm.default_entity_manager", getRepository]
+        arguments: ['App\PortalBundle\Entity\Movie']
+        lazy: true
+
+    app_portal.hashtag.repository:
+        class: App\PortalBundle\Repository\HashTagRepository
+        factory: ["@doctrine.orm.default_entity_manager", getRepository]
+        arguments: ['App\PortalBundle\Entity\HashTag']
+        lazy: true
+
+    app_portal.category.repository:
+        class: App\PortalBundle\Repository\CategoryRepository
+        factory: ["@doctrine.orm.default_entity_manager", getRepository]
+        arguments: ['App\PortalBundle\Entity\Category']
+        lazy: true

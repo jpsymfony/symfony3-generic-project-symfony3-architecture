@@ -1,0 +1,37 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        <div class="header">
+            <ul class="nav nav-pills pull-right">
+                <li class="{% block active_accueil %}{% endblock %}"><a href="{{ path('homepage') }}" id="homepage" >{{ 'menu.accueil' | trans }}</a></li>
+                <li class="{% block active_movies %}{% endblock %}"><a href="{{ path('movie_list') }}" id="movies">{{ 'menu.films' | trans }}</a></li>
+                <li class="{% block active_actors %}{% endblock %}"><a href="{{ path('actors_list') }}" id="actors">{{ 'menu.acteurs' | trans }}</a></li>
+                <li class="{% block active_contact %}{% endblock %}"><a href="{{ path('contact') }}" id="contact">{{ 'menu.contact' | trans }}</a></li>
+                {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                    <li><a href="{{ path('change_password') }}">{{ 'menu.changement_password' | trans }}</a></li>
+                    <li><a href="{{ path('security_logout') }}">{{ 'menu.deconnexion' | trans }}</a></li>
+                {% else %}
+                    <li><a href="{{ path('security_login_form') }}">{{ 'menu.connexion' | trans }}</a></li>
+                    <li><a href="{{ path('security_register_form') }}">{{ 'menu.inscription' | trans }}</a></li>
+                {% endif %}
+            </ul>
+
+            <h3 class="text-muted">Site de démo Symfony</h3>
+
+            <div id="choisir_langue">{{ 'menu.choisir_langue'|trans }} :
+                <a href="{{ path('change_langue', {'language' : 'fr'}) }}">FR</a> |
+                <a href="{{ path('change_langue', {'language' : 'en'}) }}">EN</a>
+            </div>
+        </div>
+
+        <div class="marketing">
+            {% include 'partials/errorSuccess.html.twig' %}
+            {% block content %}{% endblock %}
+        </div>
+
+        <div class="footer">
+            <p>Mywebsite @{{ 'now'|date('Y') }} {{ 'copyright' | trans({}, 'divers') }}</p>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,11 @@
+<?php
+
+namespace {{ namespace }}\Controller;
+
+{% if 'yes' == baseController %}
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+{% endif %}
+
+class {{controller}}Controller{% if 'yes' == baseController %} extends Controller {% endif %}
+{
+}

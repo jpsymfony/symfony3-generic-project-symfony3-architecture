@@ -1,0 +1,12 @@
+{% block body %}
+    <p>Message reçu de {{ data }}</p>
+    <p>Email: {{ data.email }}</p>
+    {% if data.cellphone %}<p>Numéro de téléphone: {{ data.cellphone }}</p>{% endif %}
+    {% if data.knowledge %}
+        <p>{{ data }} a connu le site ainsi: {{ ('contact.' ~ data.knowledge ~ '.knowledge') | trans }}</p>
+        {% if 'autre' == data.knowledge %}
+            {{ data.other }}
+        {% endif %}
+    {% endif %}
+    {% if data.additionnalInformation %}<p>Informations complémentaires: {{ data.additionnalInformation }}</p>{% endif %}
+{% endblock %}

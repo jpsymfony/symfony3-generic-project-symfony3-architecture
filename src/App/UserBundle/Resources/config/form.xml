@@ -1,0 +1,47 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <service id="app_user.registration.handler"
+                 class="App\UserBundle\Form\Handler\RegistrationFormHandler">
+            <argument type="service" id="app_user_manager" />
+        </service>
+
+        <service id="app_user.change_password.handler"
+                 class="App\UserBundle\Form\Handler\ChangePasswordFormHandler">
+            <argument type="service" id="app_user_manager" />
+        </service>
+
+        <service id="app_user.request_password.handler"
+                 class="App\UserBundle\Form\Handler\RequestPasswordFormHandler">
+            <argument type="service" id="app_user_manager" />
+        </service>
+
+        <service id="app_user.reset_password.handler"
+                 class="App\UserBundle\Form\Handler\ResetPasswordFormHandler">
+            <argument type="service" id="app_user_manager" />
+        </service>
+
+        <service id="form.type.change_password"
+                 class="App\UserBundle\Form\Type\ChangePasswordType">
+            <argument type="service" id="app_user_manager" />
+            <tag name="form.type" alias="change_password_form" />
+        </service>
+        
+        <service id="form.type.request_password"
+                 class="App\UserBundle\Form\Type\RequestPasswordType">
+            <argument type="service" id="app_user_manager" />
+            <tag name="form.type" alias="request_password_form" />
+        </service>
+
+        <service id="form.type.reset_password"
+                 class="App\UserBundle\Form\Type\ResetPasswordType" >
+            <argument type="service" id="app_user_manager" />
+            <argument type="service" id="request_stack" strict="false"/>
+            <tag name="form.type" alias="reset_password_form" />
+        </service>
+    </services>
+</container>

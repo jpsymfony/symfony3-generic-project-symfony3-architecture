@@ -1,0 +1,12 @@
+{% extends "base_admin.html.twig" %}
+
+{% block fos_user_profile_edit_active %}current{% endblock %}
+
+{% block body_admin %}
+<script>
+    jQuery(document).ready(function(){
+        jQuery("form").validationEngine();
+    }); 
+</script>
+{% include "FOSUserBundle:Profile:edit_content.html.twig" %}
+{% endblock body_admin %}

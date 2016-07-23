@@ -1,0 +1,1 @@
+fos.Router.setData({"base_url":"","routes":{"actors_list":{"tokens":[["variable","\/","[^\/]++","page"],["text","\/actors\/page"]],"defaults":{"page":1},"requirements":[],"hosttokens":[]}},"prefix":"","host":"localhost","scheme":"http"});

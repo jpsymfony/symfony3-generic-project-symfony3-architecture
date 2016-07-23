@@ -1,0 +1,51 @@
+{% extends "FOSUserBundle::layout.html.twig" %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block fos_user_content %}
+<body id="login">
+
+    <div id="login-wrapper" class="png_bg">
+        <div id="login-top">
+
+            <h1>Simpla Admin</h1>
+            <!-- Logo (221px width) -->
+            <img id="logo" src="{{ asset('bundles/appadmin/images/logo.png') }}" alt="Simpla Admin logo" />
+        </div> <!-- End #logn-top -->
+
+        <div id="login-content">
+            <form action="{{ path("fos_user_security_check") }}" method="post">
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+                <div class="notification information png_bg">
+                    {% if error %}
+                        {{ error.messageKey|trans(error.messageData, 'security') }}
+                    {% endif %}
+                </div>
+
+                <p>
+                    <label for="username">{{ 'security.login.username'|trans }}</label>
+                    <input class="text-input" type="text" id="username" name="_username" value="{{ last_username }}" required="required" />
+                </p>
+                <div class="clear"></div>
+                <p>
+                    <label for="password">{{ 'security.login.password'|trans }}</label>
+                    <input class="text-input" type="password" id="password" name="_password" required="required" />
+                </p>
+                <div class="clear"></div>
+                <p id="remember-password">
+                    <input type="checkbox" id="remember_me" name="_remember_me" value="on" /><span>{{ 'security.login.remember_me'|trans }}</span>
+                </p>
+                <div class="clear"></div>
+                <p>
+                    <input class="button" type="submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}" />
+                </p>
+            </form>
+            <br/><br/><br/><br/><br/>
+            <p>Forgot your password? You can <a href="{{path('fos_user_resetting_request')}}">reset it</a></p>
+        </div> <!-- End #login-content -->
+
+    </div> <!-- End #login-wrapper -->
+
+</body>
+
+{% endblock fos_user_content %}

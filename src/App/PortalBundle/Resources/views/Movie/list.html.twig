@@ -1,0 +1,20 @@
+{% extends '@AppPortal/layout.html.twig' %}
+
+{% block title %}{{ 'film.liste'|trans() }}{% endblock %}
+
+{% block active_movies %}active{% endblock %}
+
+{% block content %}
+    {{ render(controller('AppPortalBundle:Movie:formFilter', app.request.get('app_portal_movie_filter', []))) }}
+    <div style="text-align: center">
+        <h2>{{ 'film.liste'|trans() }}</h2>
+    </div>
+    {% include '@AppPortal/Movie/partials/movies.html.twig' with {'movies' : movies}  %}
+    {% if is_granted('ROLE_EDITOR') %}
+        <p><a href="{{ path('movie_new') }}">{{ 'film.ajouter'|trans }}</a><p>
+    {% endif %}
+
+    <div style="text-align: center">
+        {% include '@AppPortal/Pagination/pagination.html.twig' with {'pagination' : pagination} %}
+    </div>
+{% endblock %}

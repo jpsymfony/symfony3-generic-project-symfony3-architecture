@@ -1,0 +1,43 @@
+services:
+    app_portal.actor.manager:
+        class: App\PortalBundle\Entity\Manager\ActorManager
+        arguments:  ["@app_portal.actor.repository"]
+        calls:
+              - [setFormFactory, ['@form.factory']]
+              - [setRouter, ['@router']]
+              - [setSearchFormType, ['App\PortalBundle\Form\Type\ActorSearchFormType']]
+        lazy: true
+        tags:
+            - { name: app_portal.manager_services }
+
+    app_portal.movie.manager:
+        class: App\PortalBundle\Entity\Manager\MovieManager
+        arguments:  ["@app_portal.movie.repository"]
+        calls:
+              - [setFormFactory, ['@form.factory']]
+              - [setRouter, ['@router']]
+              - [setSearchFormType, ['App\PortalBundle\Form\Type\MovieFilterType']]
+        lazy: true
+        tags:
+            - { name: app_portal.manager_services }
+
+    app_portal.hashtag.manager:
+        class: App\PortalBundle\Entity\Manager\HashTagManager
+        arguments:  ["@app_portal.hashtag.repository"]
+        lazy: true
+        tags:
+            - { name: app_portal.manager_services }
+
+    app_portal.category.manager:
+        class: App\PortalBundle\Entity\Manager\CategoryManager
+        arguments:  ["@app_portal.category.repository"]
+        lazy: true
+        tags:
+            - { name: app_portal.manager_services }
+
+    app_portal.contact.manager:
+        class: App\PortalBundle\Entity\Manager\ContactManager
+        arguments: ['@app_core.mailer_service', '@twig', '@translator','AppPortalBundle:Mail:contact_mail.html.twig', '%email_from%', '%mailer_user%']
+        lazy: true
+        tags:
+            - { name: app_portal.manager_services }
