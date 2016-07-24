@@ -51,6 +51,7 @@ class Movie implements TraitDatetimeInterface, TraitSimpleInterface, TraitEnable
 
     /**
      * @ORM\Column(type="text")
+     * @Assert\NotBlank()
      */
     private $description;
 

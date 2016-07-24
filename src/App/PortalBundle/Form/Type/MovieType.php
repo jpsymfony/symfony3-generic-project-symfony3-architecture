@@ -94,12 +94,19 @@ class MovieType extends AbstractType
                     throw new \RuntimeException('Movie instance required.');
                 }
 
-                $movie = $this->handler->find($data->getId());
+                $dbMovie = null;
+                if (null !== $data->getId()) {
+                    $dbMovie = $this->handler->find($data->getId());
+                }
 
-                // if no image in database and no file uploaded, we set image attribute to null
-                if (null === $movie->getImage()->getId() && null === $event->getForm()->getData()->getImage()->getFile()) {
+                // if movie creation or no image in database for updated movie AND no file uploaded, we set image attribute to null
+                if ((null === $dbMovie || null === $dbMovie->getImage()->getId()) &&
+                    null === $event->getForm()->getData()->getImage()->getFile()
+                ) {
                     $data->setImage(null);
                 }
+
+
             }
         );
     }
