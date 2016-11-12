@@ -121,7 +121,7 @@ class Image
         // Le répertoire de destination
             $this->getUploadRootDir(),
             // Le nom du fichier à créer, ici « id.extension »
-            $this->id . '.' . $this->extension
+            $this->alt
         );
     }
 
@@ -131,7 +131,7 @@ class Image
     public function preRemoveUpload()
     {
         // On sauvegarde temporairement le nom du fichier, car il dépend de l'id
-        $this->tempFilename = $this->getUploadRootDir() . '/' . $this->id . '.' . $this->extension;
+        $this->tempFilename = $this->getUploadRootDir() . '/' . $this->alt;
     }
 
     /**
@@ -149,7 +149,7 @@ class Image
     public function getUploadDir()
     {
         // On retourne le chemin relatif vers l'image pour un navigateur
-        return 'upload/img';
+        return 'uploads/img';
     }
 
     protected function getUploadRootDir()
@@ -160,7 +160,7 @@ class Image
 
     public function getWebPath()
     {
-        return $this->getUploadDir().'/'.$this->getId().'.'.$this->getExtension();
+        return $this->getUploadDir().'/'.$this->getAlt();
     }
 
     public function isNullObject()

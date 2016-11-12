@@ -100,6 +100,10 @@ form li {
     color:#090;
 }
 
-#app_portal_movie_filter > div:nth-child(3) > div > div > ul, #app_portal_movie_filter > div:nth-child(4) > div > div > ul {
+#movie_filter > div:nth-child(3) > div > div > ul,
+#movie_filter > div:nth-child(4) > div > div > ul,
+div.marketing > form > div:nth-child(5) > div > div > ul,
+div.marketing > form > div:nth-child(6) > div > div > ul,
+div.marketing > form > div:nth-child(7) > div > div > ul {
     width: 200px;
 }

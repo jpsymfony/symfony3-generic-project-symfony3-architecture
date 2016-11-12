@@ -26,6 +26,10 @@ class NewMovieFormHandlerStrategy extends AbstractMovieFormHandlerStrategy
         $this->securityTokenStorage = $securityTokenStorage;
     }
 
+    /**
+     * @param Movie $movie
+     * @return \Symfony\Component\Form\Form|\Symfony\Component\Form\FormInterface
+     */
     public function createForm(Movie $movie)
     {
         $this->form = $this->formFactory->create(MovieType::class, $movie, array(
@@ -38,6 +42,12 @@ class NewMovieFormHandlerStrategy extends AbstractMovieFormHandlerStrategy
         return $this->form;
     }
 
+    /**
+     * @param Request $request
+     * @param Movie $movie
+     * @param ArrayCollection|null $originalHashTags
+     * @return string
+     */
     public function handleForm(Request $request, Movie $movie, ArrayCollection $originalHashTags = null)
     {
         $movie->setAuthor($this->securityTokenStorage->getToken()->getUser());

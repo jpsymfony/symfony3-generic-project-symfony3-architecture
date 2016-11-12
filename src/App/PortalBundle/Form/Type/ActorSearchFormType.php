@@ -18,11 +18,6 @@ class ActorSearchFormType extends AbstractType
                             'label' => 'rechercher'
                 ));
     }
-    
-    public function getName()
-    {
-        return 'actor_search';
-    }
 
     public function configureOptions(OptionsResolver $resolver)
     {

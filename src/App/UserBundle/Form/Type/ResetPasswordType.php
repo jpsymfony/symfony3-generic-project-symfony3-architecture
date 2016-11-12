@@ -29,7 +29,9 @@ class ResetPasswordType extends AbstractType
     private $request;
 
     /**
+     * ResetPasswordType constructor.
      * @param UserManagerInterface $userManager
+     * @param RequestStack $request
      */
     public function __construct(UserManagerInterface $userManager, RequestStack $request)
     {
@@ -82,10 +84,5 @@ class ResetPasswordType extends AbstractType
         $resolver->setDefaults([
             'data_class' => 'App\UserBundle\Entity\Password\ResetPassword',
         ]);
-    }
-
-    public function getName()
-    {
-        return 'reset_password_form';
     }
 } 

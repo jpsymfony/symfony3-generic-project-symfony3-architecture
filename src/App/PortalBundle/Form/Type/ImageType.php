@@ -22,9 +22,4 @@ class ImageType extends AbstractType
             'data_class' => 'App\PortalBundle\Entity\Image'
         ));
     }
-
-    public function getName()
-    {
-        return 'app_portal_image';
-    }
 }

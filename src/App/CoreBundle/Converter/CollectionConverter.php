@@ -71,16 +71,16 @@ class CollectionConverter implements \Sensio\Bundle\FrameworkExtraBundle\Request
         }
         
         try {
-            $managerClassName = $options['manager'];
+            $managerClassName = $this->container->get($options['manager']);
         } catch (\Exception $e) {
-            throw new NotFoundHttpException(sprintf('%s service manager option not found.', $managerClassName));
+            throw new NotFoundHttpException(sprintf('%s service manager not found.', $managerClassName));
         }
 
         try {
-            $result = $this->container->get($managerClassName)->all("object", $max, $orderby, $dir);
+            $result = $managerClassName->all("object", $max, $orderby, $dir);
             $collection = new ArrayCollection($result);
         } catch (\Exception $e) {
-            throw new NotFoundHttpException(sprintf('%s service manager not found.', $managerClassName));
+            throw new NotFoundHttpException(sprintf('error while trying to invoke all on %s manager.', $managerClassName));
         }
         
         if (!($collection instanceof ArrayCollection)) {

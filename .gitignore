@@ -9,6 +9,6 @@
 !var/logs/.gitkeep
 !var/sessions/.gitkeep
 /phpunit.xml
-/web/upload
+/web/uploads
 /web/media
 .idea

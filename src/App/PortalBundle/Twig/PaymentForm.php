@@ -8,12 +8,6 @@ use Symfony\Component\Translation\Exception\NotFoundResourceException;
 
 class PaymentForm extends \Twig_Extension
 {
-
-    /**
-     * @var string $url
-     */
-    private $url = null;
-
     /**
      * @var string $defaultPaymentOrganism
      */
@@ -23,10 +17,16 @@ class PaymentForm extends \Twig_Extension
      */
     private $paymentManagerService;
 
+    /**
+     * @var array
+     */
+    private $configPayment;
+
     public function __construct(PaymentManagerService $paymentManagerService, $configPayment)
     {
         $this->paymentManagerService = $paymentManagerService;
-        $this->defaultPaymentOrganism = ucfirst($configPayment['default']);
+        $this->configPayment = $configPayment;
+        $this->defaultPaymentOrganism = ucfirst($this->configPayment['default']);
 
     }
 
@@ -40,15 +40,6 @@ class PaymentForm extends \Twig_Extension
     public function getName()
     {
         return 'payment_form';
-    }
-
-    public function setUrl($configPayment)
-    {
-        if (!isset($configPayment[$this->defaultPaymentOrganism])) {
-            throw new NotFoundResourceException('no configPayment for ' . $this->defaultPaymentOrganism);
-        }
-
-        $this->url = $configPayment[$this->defaultPaymentOrganism]['url'];
     }
 
     public function getPaymentForm($values, $displaySubmitBtn, $message)
@@ -71,7 +62,18 @@ class PaymentForm extends \Twig_Extension
             throw new NotFoundResourceException('no GenericPaymentService found for ' . $this->defaultPaymentOrganism);
         }
 
-        return $paymentSolution->getHtml($this->url, $parameters, $displaySubmitBtn, $message);
+        var_dump($paymentSolution);
+
+        return $paymentSolution->getHtml($this->getUrl(), $parameters, $displaySubmitBtn, $message);
+    }
+
+    private function getUrl()
+    {
+        if (!isset($this->configPayment[$this->defaultPaymentOrganism])) {
+            throw new NotFoundResourceException('no configPayment for ' . $this->defaultPaymentOrganism);
+        }
+
+        return $this->configPayment[$this->defaultPaymentOrganism]['url'];
     }
 
 }

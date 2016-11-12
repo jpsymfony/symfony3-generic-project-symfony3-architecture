@@ -40,11 +40,6 @@ class ActorType extends AbstractType
             'label' => 'valider'
         ));
     }
-
-    public function getName()
-    {
-        return 'app_portal_actor';
-    }
     
     public function configureOptions(OptionsResolver $resolver)
     {

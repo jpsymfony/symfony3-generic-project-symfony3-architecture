@@ -46,9 +46,4 @@ class HashTagCollectionType extends AbstractType
     {
         return CollectionType::class;
     }
-
-    public function getName()
-    {
-        return 'hashtags';
-    }
 }

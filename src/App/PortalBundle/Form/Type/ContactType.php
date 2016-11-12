@@ -51,9 +51,4 @@ class ContactType extends AbstractType
         ));
     }
 
-    public function getName()
-    {
-        return 'app_portal_contacttype';
-    }
-
 }

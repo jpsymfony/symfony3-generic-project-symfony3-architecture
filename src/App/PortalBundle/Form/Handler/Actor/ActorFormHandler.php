@@ -32,10 +32,16 @@ class ActorFormHandler
      */
     protected $updateActorFormHandlerStrategy;
 
+    /**
+     * @param ActorFormHandlerStrategy $nafhs
+     */
     public function setNewActorFormHandlerStrategy(ActorFormHandlerStrategy $nafhs) {
         $this->newActorFormHandlerStrategy = $nafhs;
     }
 
+    /**
+     * @param ActorFormHandlerStrategy $uafhs
+     */
     public function setUpdateActorFormHandlerStrategy(ActorFormHandlerStrategy $uafhs) {
         $this->updateActorFormHandlerStrategy = $uafhs;
     }

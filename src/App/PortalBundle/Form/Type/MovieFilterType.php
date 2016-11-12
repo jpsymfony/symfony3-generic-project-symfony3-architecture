@@ -67,11 +67,6 @@ class MovieFilterType extends AbstractType
                 );
     }
 
-    public function getName()
-    {
-        return 'app_portal_movie_filter';
-    }
-
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(

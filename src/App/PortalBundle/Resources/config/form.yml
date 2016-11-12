@@ -31,14 +31,14 @@ services:
     app_portal.movie_search.form:
         class: App\PortalBundle\Form\Type\MovieFilterType
         tags:
-            - { name: form.type, alias: app_portal_movie_filter }
+            - { name: form.type }
 
-    app_portal.movie.form.type:
+    app_portal.movie.form:
         class: App\PortalBundle\Form\Type\MovieType
         arguments:
             - "@app_portal.movie.manager"
         tags:
-            - { name: form.type, alias: app_portal_movie }
+            - { name: form.type }
 
 
     app_portal.actor.form.handler:
@@ -66,26 +66,26 @@ services:
     app_portal.actor_search.form:
             class: App\PortalBundle\Form\Type\ActorSearchFormType
             tags:
-                - { name: form.type, alias: actor_search }
+                - { name: form.type }
 
 
     app_portal.request_contact.handler:
         class: App\PortalBundle\Form\Handler\Contact\ContactFormHandler
         arguments: ['@app_portal.contact.manager']
 
-    app_portal.contact.form.type:
+    app_portal.contact.form:
             class: App\PortalBundle\Form\Type\ContactType
             tags:
-                - { name: form.type, alias: app_portal_contacttype }
+                - { name: form.type }
 
 
-    app_portal.hashtag.form:
+    app_portal.hashtag.collection.form:
         class: App\PortalBundle\Form\Type\HashTagCollectionType
         arguments: ["%app_portal.max_hashtag_limit%"]
         tags:
-            - { name: form.type, alias: hashtags }
+            - { name: form.type }
 
-    app_portal.hashtag.form.type:
+    app_portal.hashtag.form:
         class: App\PortalBundle\Form\Type\HashTagType
         tags:
-            - { name: form.type, alias: app_portal_hashtag }
+            - { name: form.type }

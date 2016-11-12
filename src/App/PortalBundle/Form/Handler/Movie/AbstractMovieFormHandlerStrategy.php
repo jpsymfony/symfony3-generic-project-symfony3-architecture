@@ -43,7 +43,7 @@ abstract class AbstractMovieFormHandlerStrategy implements MovieFormHandlerStrat
      * @param MovieManagerInterface $movieManager
      * @return AbstractMovieFormHandlerStrategy
      */
-    public function setMovieManager($movieManager)
+    public function setMovieManager(MovieManagerInterface $movieManager)
     {
         $this->movieManager = $movieManager;
         return $this;
@@ -53,7 +53,7 @@ abstract class AbstractMovieFormHandlerStrategy implements MovieFormHandlerStrat
      * @param FormFactoryInterface $formFactory
      * @return AbstractMovieFormHandlerStrategy
      */
-    public function setFormFactory($formFactory)
+    public function setFormFactory(FormFactoryInterface $formFactory)
     {
         $this->formFactory = $formFactory;
         return $this;
@@ -63,7 +63,7 @@ abstract class AbstractMovieFormHandlerStrategy implements MovieFormHandlerStrat
      * @param RouterInterface $router
      * @return AbstractMovieFormHandlerStrategy
      */
-    public function setRouter($router)
+    public function setRouter(RouterInterface $router)
     {
         $this->router = $router;
         return $this;
@@ -73,7 +73,7 @@ abstract class AbstractMovieFormHandlerStrategy implements MovieFormHandlerStrat
      * @param TranslatorInterface $translator
      * @return AbstractMovieFormHandlerStrategy
      */
-    public function setTranslator($translator)
+    public function setTranslator(TranslatorInterface $translator)
     {
         $this->translator = $translator;
         return $this;
@@ -84,8 +84,18 @@ abstract class AbstractMovieFormHandlerStrategy implements MovieFormHandlerStrat
         return $this->form->createView();
     }
 
+    /**
+     * @param Request $request
+     * @param Movie $movie
+     * @param ArrayCollection|null $originalTags
+     * @return mixed
+     */
     abstract public function handleForm(Request $request, Movie $movie, ArrayCollection $originalTags = null);
 
+    /**
+     * @param Movie $movie
+     * @return mixed
+     */
     abstract public function createForm(Movie $movie);
 
 

@@ -77,10 +77,4 @@ class ChangePasswordType extends AbstractType
             'data_class' => 'App\UserBundle\Entity\Password\ChangePassword',
         ]);
     }
-
-
-    public function getName()
-    {
-        return 'change_password_form';
-    }
 }

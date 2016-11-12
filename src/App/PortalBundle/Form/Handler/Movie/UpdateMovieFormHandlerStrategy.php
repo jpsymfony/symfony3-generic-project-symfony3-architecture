@@ -40,6 +40,10 @@ class UpdateMovieFormHandlerStrategy extends AbstractMovieFormHandlerStrategy
         $this->authorizationChecker = $authorizationChecker;
     }
 
+    /**
+     * @param Movie $movie
+     * @return \Symfony\Component\Form\Form|\Symfony\Component\Form\FormInterface
+     */
     public function createForm(Movie $movie)
     {
         // we put image in the MovieType constructor to fill value when the form is loaded
@@ -57,6 +61,12 @@ class UpdateMovieFormHandlerStrategy extends AbstractMovieFormHandlerStrategy
         return $this->form;
     }
 
+    /**
+     * @param Request $request
+     * @param Movie $movie
+     * @param ArrayCollection|null $originalHashTags
+     * @return string
+     */
     public function handleForm(Request $request, Movie $movie, ArrayCollection $originalHashTags = null)
     {
         if (!$this->authorizationChecker->isGranted(MovieVoter::EDIT, $movie)) {

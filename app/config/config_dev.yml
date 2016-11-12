@@ -57,7 +57,7 @@ assetic:
 
 app_portal:
        payment_organisms:
-           default: Be2bill
+           default: Paypal
            Be2bill:
                identifier: MYWEBSITE
                password: 123456789

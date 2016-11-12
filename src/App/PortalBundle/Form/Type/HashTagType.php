@@ -5,6 +5,7 @@ namespace App\PortalBundle\Form\Type;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\Util\StringUtil;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class HashTagType extends AbstractType
@@ -20,10 +21,5 @@ class HashTagType extends AbstractType
         $resolver->setDefaults(array(
                 'data_class' => 'App\PortalBundle\Entity\HashTag',
         ));
-    }
-
-    public function getName()
-    {
-        return 'app_portal_hashtag';
     }
 }

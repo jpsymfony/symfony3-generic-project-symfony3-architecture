@@ -36,9 +36,4 @@ class RegistrationType extends AbstractType
             'data_class' => 'App\UserBundle\Entity\Registration\Registration',
         ]);
     }
-
-    public function getName()
-    {
-        return 'registration_form';
-    }
 } 
