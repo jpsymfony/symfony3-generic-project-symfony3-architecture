@@ -66,6 +66,7 @@ app:
            identifier: mywebsite@mywebsite.com
            password: ~
            url: http://www.sandbox.paypal.com/cgi-bin/webscr
+
 swiftmailer:
     encryption: ssl
     auth_mode:  login
