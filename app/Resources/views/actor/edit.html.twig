@@ -1,0 +1,51 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}
+    {% if actor.id %}
+        {{ 'acteur.modifier'|trans({'%prenom%':actor.firstName,'%nom%':actor.lastName}) }}
+    {% else %}
+        {{ 'acteur.ajouter'|trans }}
+    {% endif %}
+{% endblock %}
+
+{% block active_actors %}active{% endblock %}
+
+{% form_theme form "bootstrap_3_layout.html.twig" %}
+
+{% block content %}
+
+{{ form_start(form) }}
+<div class="error">
+{{ form_errors(form) }}
+</div>
+<table>
+    <tr>
+	<td>{{ form_label(form.firstName) }}</td>
+	<td>{{ form_label(form.firstName) }}</td>
+	<td>{{ form_label(form.birthday) }}</td>
+    <td>{{ form_label(form.sex) }}</td>
+    </tr>
+    <tr>
+	<td>
+		{{ form_errors(form.lastName) }}
+		{{ form_widget(form.lastName) }}
+	</td>
+	<td>
+		{{ form_errors(form.firstName) }}
+		{{ form_widget(form.firstName) }}
+	</td>
+	<td>
+		{{ form_errors(form.birthday) }}
+		{{ form_widget(form.birthday) }}
+	</td>
+	<td>
+		{{ form_errors(form.sex) }}
+		{{ form_widget(form.sex) }}
+	</td>
+    </tr>
+</table>
+{{ form_end(form) }}
+
+<p><a href="{{ path('actors_list') }}">{{ 'acteur.liste.retour'|trans }}</a></p>
+
+{% endblock %}

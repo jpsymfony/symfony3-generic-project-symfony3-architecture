@@ -1,0 +1,5 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+    {{ payment_form(values, displaySubmitBtn, message, createAlias)|raw }}
+{% endblock %}

@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "6819421bf24030fb10c57b060151f9f2",
-    "content-hash": "3e1d3884b144ad326826849c5867071a",
+    "hash": "51ff9d39a5668c0625d06cc312558827",
+    "content-hash": "e8ee42dd7f9c763967f8fcaa42ed5089",
     "packages": [
         {
             "name": "beberlei/DoctrineExtensions",
@@ -1475,6 +1475,60 @@
             "time": "2014-01-12 16:20:24"
         },
         {
+            "name": "jpsymfony/core-bundle",
+            "version": "v1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jpsymfony/CoreBundle.git",
+                "reference": "de34c834ab61c3b2ac06fe453b3a5405c4b9ae94"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jpsymfony/CoreBundle/zipball/de34c834ab61c3b2ac06fe453b3a5405c4b9ae94",
+                "reference": "de34c834ab61c3b2ac06fe453b3a5405c4b9ae94",
+                "shasum": ""
+            },
+            "require": {
+                "doctrine/doctrine-bundle": "~1.4",
+                "doctrine/orm": "^2.4",
+                "php": "^5.5.9 || ^7.0",
+                "sensio/framework-extra-bundle": "^3.0",
+                "stof/doctrine-extensions-bundle": "~1.2",
+                "symfony/console": "^2.7 || ^3.0",
+                "symfony/form": "^2.7 || ^3.0",
+                "symfony/framework-bundle": "^2.7 || ^3.0",
+                "symfony/phpunit-bridge": "^2.7 || ^3.0",
+                "symfony/translation": "~2.3 || ^3.0",
+                "symfony/validator": "^2.7 || ^3.0",
+                "symfony/yaml": "^2.7 || ^3.0"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-4": {
+                    "Jpsymfony\\CoreBundle\\": ""
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jean-Pierre (John) Saulnier",
+                    "email": "jpsymfony@free.fr"
+                }
+            ],
+            "description": "Symfony JpsymfonyCoreBundle",
+            "homepage": "https://github.com/jpsymfony/CoreBundle",
+            "keywords": [
+                "core management"
+            ],
+            "support": {
+                "source": "https://github.com/jpsymfony/CoreBundle/tree/master",
+                "issues": "https://github.com/jpsymfony/CoreBundle/issues"
+            },
+            "time": "2016-11-12 23:55:52"
+        },
+        {
             "name": "kriswallsmith/assetic",
             "version": "v1.4.0",
             "source": {
@@ -2359,6 +2413,61 @@
                 "logging"
             ],
             "time": "2016-11-06 18:54:50"
+        },
+        {
+            "name": "symfony/phpunit-bridge",
+            "version": "v3.1.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/phpunit-bridge.git",
+                "reference": "1f4e2059cf4ecae1053b9c3027b3fc548fd077b9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/phpunit-bridge/zipball/1f4e2059cf4ecae1053b9c3027b3fc548fd077b9",
+                "reference": "1f4e2059cf4ecae1053b9c3027b3fc548fd077b9",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "suggest": {
+                "symfony/debug": "For tracking deprecated interfaces usages at runtime with DebugClassLoader"
+            },
+            "type": "symfony-bridge",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.1-dev"
+                }
+            },
+            "autoload": {
+                "files": [
+                    "bootstrap.php"
+                ],
+                "psr-4": {
+                    "Symfony\\Bridge\\PhpUnit\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nicolas Grekas",
+                    "email": "p@tchwork.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony PHPUnit Bridge",
+            "homepage": "https://symfony.com",
+            "time": "2016-08-19 06:48:39"
         },
         {
             "name": "symfony/polyfill-apcu",
@@ -4276,61 +4385,6 @@
             ],
             "description": "This bundle generates code for you",
             "time": "2016-11-07 19:48:31"
-        },
-        {
-            "name": "symfony/phpunit-bridge",
-            "version": "v3.1.6",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/phpunit-bridge.git",
-                "reference": "1f4e2059cf4ecae1053b9c3027b3fc548fd077b9"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/phpunit-bridge/zipball/1f4e2059cf4ecae1053b9c3027b3fc548fd077b9",
-                "reference": "1f4e2059cf4ecae1053b9c3027b3fc548fd077b9",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.3"
-            },
-            "suggest": {
-                "symfony/debug": "For tracking deprecated interfaces usages at runtime with DebugClassLoader"
-            },
-            "type": "symfony-bridge",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "3.1-dev"
-                }
-            },
-            "autoload": {
-                "files": [
-                    "bootstrap.php"
-                ],
-                "psr-4": {
-                    "Symfony\\Bridge\\PhpUnit\\": ""
-                },
-                "exclude-from-classmap": [
-                    "/Tests/"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Nicolas Grekas",
-                    "email": "p@tchwork.com"
-                },
-                {
-                    "name": "Symfony Community",
-                    "homepage": "https://symfony.com/contributors"
-                }
-            ],
-            "description": "Symfony PHPUnit Bridge",
-            "homepage": "https://symfony.com",
-            "time": "2016-08-19 06:48:39"
         },
         {
             "name": "webmozart/assert",

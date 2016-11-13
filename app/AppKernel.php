@@ -22,11 +22,8 @@ class AppKernel extends Kernel
             new FOS\UserBundle\FOSUserBundle(),
             new Liip\ImagineBundle\LiipImagineBundle(),
 
-            new App\PortalBundle\AppPortalBundle(),
-            new App\CoreBundle\AppCoreBundle(),
-            new App\UserBundle\AppUserBundle(),
-            new \App\AdminBundle\AppAdminBundle(),
-            new \App\BackUserBundle\AppBackUserBundle(),
+            new AppBundle\AppBundle(),
+            new Jpsymfony\CoreBundle\JpsymfonyCoreBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

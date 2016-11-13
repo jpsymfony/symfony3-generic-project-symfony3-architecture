@@ -1,0 +1,47 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <service id="app.user_registration.handler"
+                 class="AppBundle\Form\Handler\User\RegistrationFormHandler">
+            <argument type="service" id="app.user_manager" />
+        </service>
+
+        <service id="app.user_change_password.handler"
+                 class="AppBundle\Form\Handler\User\ChangePasswordFormHandler">
+            <argument type="service" id="app.user_manager" />
+        </service>
+
+        <service id="app.user_request_password.handler"
+                 class="AppBundle\Form\Handler\User\RequestPasswordFormHandler">
+            <argument type="service" id="app.user_manager" />
+        </service>
+
+        <service id="app.user_reset_password.handler"
+                 class="AppBundle\Form\Handler\User\ResetPasswordFormHandler">
+            <argument type="service" id="app.user_manager" />
+        </service>
+
+        <service id="form.type.change_password"
+                 class="AppBundle\Form\Type\User\ChangePasswordType">
+            <argument type="service" id="app.user_manager" />
+            <tag name="form.type" />
+        </service>
+        
+        <service id="form.type.request_password"
+                 class="AppBundle\Form\Type\User\RequestPasswordType">
+            <argument type="service" id="app.user_manager" />
+            <tag name="form.type" />
+        </service>
+
+        <service id="form.type.reset_password"
+                 class="AppBundle\Form\Type\User\ResetPasswordType" >
+            <argument type="service" id="app.user_manager" />
+            <argument type="service" id="request_stack" strict="false"/>
+            <tag name="form.type" />
+        </service>
+    </services>
+</container>

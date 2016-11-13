@@ -1,0 +1,40 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <service id="app.be2bill_payment_service"
+                 class="AppBundle\Services\Be2bill" lazy="true">
+            <tag name="app.payment_services"/>
+        </service>
+
+        <service id="app.paypal_payment_service_"
+                 class="AppBundle\Services\Paypal" lazy="true">
+            <tag name="app.payment_services"/>
+        </service>
+
+        <service id="app.payment_container_service"
+                 class="AppBundle\Services\PaymentContainerService">
+        </service>
+
+        <service id="app.payment_manager_service"
+                 class="AppBundle\Services\PaymentManagerService">
+            <call method="setPaymentContainerService">
+                <argument type="service" id="app.payment_container_service"/>
+            </call>
+        </service>
+
+        <service id="app.manager_container_service"
+                 class="AppBundle\Services\ManagerContainerService">
+        </service>
+
+        <service id="app.manager_service"
+                 class="AppBundle\Services\ManagerService">
+            <call method="setManagerContainerService">
+                <argument type="service" id="app.manager_container_service"/>
+            </call>
+        </service>
+    </services>
+</container>

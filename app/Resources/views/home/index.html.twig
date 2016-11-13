@@ -1,0 +1,13 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}{{ 'menu.accueil'|trans }}{% endblock %}
+
+{% block active_accueil %}active{% endblock %}
+
+{% block content %}
+    <h3>{{ 'acteur.top.jeunes'|trans }}</h3>
+    {{ render(controller('AppBundle:Actor:top', {'max': 3, 'displayActorsFound': displayActorsFound})) }}
+
+    <h3>{{ 'film.top'|trans }}</h3>
+    {{ render(controller('AppBundle:Movie:top', {'max': 3})) }}
+{% endblock %}

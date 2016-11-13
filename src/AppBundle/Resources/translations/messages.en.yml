@@ -1,0 +1,109 @@
+# Acteur
+acteur:
+      label: Actor
+      nom: Last Name
+      prenom: First Name
+      dateNaissance: Birthday
+      sexe: Gender
+      liste: Actors list
+      trouve: ]-Inf, 0]no actor found|]0, 1]1 actor found|]1,+Inf]%count% actors found
+      liste.retour: Back to actors list
+      ajouter: Add an actor
+      modifier: Edit actor %prenom% %nom%
+      ajouter.succes: The actor %prenom% %nom% has successfully been added !
+      modifier.succes: The actor %prenom% %nom% has successfully been updated !
+      top.jeunes: Top youngest actors
+      chercher: Search
+      supprime: The actor %actor% has successfully been deleted
+
+# Film
+film: 
+    label: Movie
+    titre: Title
+    description: Description
+    categorie: Category
+    acteurs: Actors
+    liste: Movies list
+    liste.retour: Back to movies list
+    hashtags: HashTags
+    ajouter: Add a movie
+    modifier: Edit movie %titre%
+    ajouter.succes: The movie %titre% has successfully been added !
+    modifier.succes: The movie %titre% has successfully been updated !
+    modifier.erreur: You cannot edit the movie "%movie%" because you did not create it.
+    aucun: No movie found
+    fiche: View movie %titre%
+    top: Top movies
+    dateSortieDebut: Release date between
+    dateSortieFin: And
+    categories.toutes: All categories
+    image: Picture
+    supprime : The movie %title% has successfully been deleted
+    dateSortie: Released at
+    file: File
+    horaire: Begins at
+
+# Menu
+menu:
+    accueil: Home
+    films: Movies
+    acteurs: Actors
+    contact: Contact us
+    connexion: Log in
+    deconnexion: Log out
+    inscription: Sign in
+    changement_password: Password Changement
+    choisir_langue: Choose a language
+
+contact:
+    suggestion_newsletter: Do you have some extra information you wished to tell us ? For instance reduced mobility, <br/> hearing problems or sight difficulties in sitting position...
+    center_discover: How did you find our website ?
+    internet.knowledge: Internet
+    facebook.knowledge: Facebook
+    pubpapier.knowledge: Printed advertisements
+    boucheaoreille.knowledge: Word of mouth
+    newspaper: Newspapers
+    network: Social networks
+    autre.knowledge: Other
+    first_name: First name
+    last_name: Last name
+    phone: Cellphone
+    email: Email
+    additional_information: Additional Information
+    validation_button: send
+    pub_papier: prospectus
+    message_subject: Message de %name%
+    autre: Other
+
+user:
+    connexion:
+            new_password: New password
+            confirmation: Repeat the password
+            label: Connexion
+            username: Identifier
+            password: Password
+            password_forgotten: Password forgotten
+    registration:
+            label: Registration
+            username: Identifier
+            email: Email
+            password: Password
+            confirm: Repeat the password
+            register: Send
+    change_password:
+            title: Change your password
+            old_password: Old password
+            new_password: New password
+            repeat_new_password: Repeat the password
+            button: Send
+    reset_password:
+            identifier: Identifier
+            button: Send
+            title: Reset of your password
+            new_password: New password
+            repeat_new_password: Repeat the password
+            successful_reset: Your password has been resetted. You can log in now
+    request_password:
+            button: Send the request
+            title: Request for changing your password
+            mail_sent: A mail has been sent to your mailbox to reset your password

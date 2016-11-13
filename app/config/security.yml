@@ -3,7 +3,7 @@
 security:
     encoders:
         FOS\UserBundle\Model\UserInterface: bcrypt
-        App\UserBundle\Entity\User: sha512
+        AppBundle\Entity\User: sha512
 
     role_hierarchy:
         ROLE_VISITOR:     ROLE_USER
@@ -13,7 +13,7 @@ security:
 
     providers:
         database_users:
-            entity: { class: AppUserBundle:User, property: username }
+            entity: { class: AppBundle:User, property: username }
         fos_userbundle:
             id: fos_user.user_provider.username
 

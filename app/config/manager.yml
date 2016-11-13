@@ -1,0 +1,43 @@
+services:
+    app.actor.manager:
+        class: AppBundle\Entity\Manager\ActorManager
+        arguments:  ["@app.actor.repository"]
+        calls:
+              - [setFormFactory, ['@form.factory']]
+              - [setRouter, ['@router']]
+              - [setSearchFormType, ['AppBundle\Form\Type\ActorSearchFormType']]
+        lazy: true
+        tags:
+            - { name: app.manager_services }
+
+    app.movie.manager:
+        class: AppBundle\Entity\Manager\MovieManager
+        arguments:  ["@app.movie.repository"]
+        calls:
+              - [setFormFactory, ['@form.factory']]
+              - [setRouter, ['@router']]
+              - [setSearchFormType, ['AppBundle\Form\Type\MovieFilterType']]
+        lazy: true
+        tags:
+            - { name: app.manager_services }
+
+    app.hashtag.manager:
+        class: AppBundle\Entity\Manager\HashTagManager
+        arguments:  ["@app.hashtag.repository"]
+        lazy: true
+        tags:
+            - { name: app.manager_services }
+
+    app.category.manager:
+        class: AppBundle\Entity\Manager\CategoryManager
+        arguments:  ["@app.category.repository"]
+        lazy: true
+        tags:
+            - { name: app.manager_services }
+
+    app.contact.manager:
+        class: AppBundle\Entity\Manager\ContactManager
+        arguments: ['@jpsymfony.mailer_service', '@twig', '@translator','mail/contact_mail.html.twig', '%email_from%', '%mailer_user%']
+        lazy: true
+        tags:
+            - { name: app.manager_services }

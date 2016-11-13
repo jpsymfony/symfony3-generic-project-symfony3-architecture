@@ -16,6 +16,12 @@
             "Tests\\": "tests/"
         }
     },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url":  "git@github.com:jpsymfony/CoreBundle.git"
+        }
+    ],
     "require": {
         "php": ">=5.5.9",
         "symfony/symfony": "3.1.*",
@@ -38,7 +44,8 @@
         "guzzlehttp/guzzle": "^6.2",
         "ocramius/proxy-manager": "^1.0",
         "beberlei/DoctrineExtensions": "^1.0",
-        "liip/imagine-bundle": "^1.6"
+        "liip/imagine-bundle": "^1.6",
+        "jpsymfony/core-bundle": "1.0"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",

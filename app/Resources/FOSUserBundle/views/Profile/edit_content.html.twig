@@ -10,35 +10,35 @@
 
     <div class="content-box-content">
 
-            {% for flashMessage in app.session.flashbag.get('notice') %}
-                <div class="notification success png_bg">
-                    <div>{{ flashMessage }}</div>
-                </div>
-            {% endfor %}
-        
-            {% trans_default_domain 'FOSUserBundle' %}
+        {% for flashMessage in app.session.flashbag.get('notice') %}
+            <div class="notification success png_bg">
+                <div>{{ flashMessage }}</div>
+            </div>
+        {% endfor %}
 
-            {{ form_start(form, { 'action': path('fos_user_profile_edit'), 'attr': { 'class': 'fos_user_profile_edit' } }) }}
-                <div id="fos_user_profile_form">
-                    <p>
-                        {{ form_label(form.username, 'Username *') }}  
-                        {{ form_widget(form.username, { 'attr': {'class': 'text-input small-input validate[required]'} }) }}
-                    </p>
-                    <p>
-                        {{ form_label(form.email, 'Email *') }}  
-                        {{ form_widget(form.email, { 'attr': {'class': 'text-input small-input validate[required]'} }) }}
-                    </p>
-                    <p>
-                        {{ form_label(form.current_password, 'Current Password *') }}
-                        {{ form_widget(form.current_password, { 'attr': {'class': 'text-input small-input validate[required]'} }) }}
-                        {{ form_errors(form.current_password) }}
-                        
-                    </p>
-                    <div>
-                        <input type="submit" class="button" value="{{ 'profile.edit.submit'|trans }}" />
-                    </div>
-                    {{ form_rest(form) }}
-                </div>
-            {{ form_end(form) }}
+        {% trans_default_domain 'FOSUserBundle' %}
+
+        {{ form_start(form, { 'action': path('fos_user_profile_edit'), 'attr': { 'class': 'fos_user_profile_edit' } }) }}
+        <div id="fos_user_profile_form">
+            <p>
+                {{ form_label(form.username, 'profile.show.username') }}
+                {{ form_widget(form.username, { 'attr': {'class': 'text-input small-input validate[required]'} }) }}
+            </p>
+            <p>
+                {{ form_label(form.email, 'profile.show.email') }}
+                {{ form_widget(form.email, { 'attr': {'class': 'text-input small-input validate[required]'} }) }}
+            </p>
+            <p>
+                {{ form_label(form.current_password, 'form.current_password') }}
+                {{ form_widget(form.current_password, { 'attr': {'class': 'text-input small-input validate[required]'} }) }}
+                {{ form_errors(form.current_password) }}
+
+            </p>
+            <div>
+                <input type="submit" class="button" value="{{ 'profile.edit.submit'|trans }}" />
+            </div>
+            {{ form_rest(form) }}
+        </div>
+        {{ form_end(form) }}
     </div> <!-- End .content-box-content -->
 </div> <!-- End .content-box -->

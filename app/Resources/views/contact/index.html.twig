@@ -1,0 +1,11 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}{{ 'menu.contact'|trans() }}{% endblock %}
+
+{% block active_contact %}active{% endblock %}
+
+{% form_theme form "contact/form_theme.html.twig" "bootstrap_3_horizontal_layout.html.twig" %}
+
+{% block content %}
+    {{ form(form, { attr: { novalidate: 'novalidate' } }) }}
+{% endblock %}

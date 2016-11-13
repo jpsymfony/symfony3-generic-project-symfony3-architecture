@@ -1,0 +1,91 @@
+services:
+    app.abstract_movie.form.handler.strategy:
+        abstract:  true
+        class: AppBundle\Form\Handler\Movie\AbstractMovieFormHandlerStrategy
+        calls:
+           - [setMovieManager, ['@app.movie.manager']]
+           - [setFormFactory, ['@form.factory']]
+           - [setRouter, ['@router']]
+           - [setTranslator, ['@translator']]
+
+    app.movie.form.handler:
+        class: AppBundle\Form\Handler\Movie\MovieFormHandler
+        calls:
+            - [setManagerService, ['@app.manager_service']]
+            - [setNewMovieFormHandlerStrategy, ['@app.new_movie.form.handler.strategy']]
+            - [setUpdateMovieFormHandlerStrategy, ['@app.update_movie.form.handler.strategy']]
+
+    app.new_movie.form.handler.strategy:
+        class: AppBundle\Form\Handler\Movie\NewMovieFormHandlerStrategy
+        parent: app.abstract_movie.form.handler.strategy
+        arguments:
+            - "@security.token_storage"
+
+    app.update_movie.form.handler.strategy:
+        class: AppBundle\Form\Handler\Movie\UpdateMovieFormHandlerStrategy
+        parent: app.abstract_movie.form.handler.strategy
+        arguments:
+            - "@app.hashtag.manager"
+            - "@security.authorization_checker"
+
+    app.movie_search.form:
+        class: AppBundle\Form\Type\MovieFilterType
+        tags:
+            - { name: form.type }
+
+    app.movie.form:
+        class: AppBundle\Form\Type\MovieType
+        arguments:
+            - "@app.movie.manager"
+        tags:
+            - { name: form.type }
+
+
+    app.actor.form.handler:
+        class: AppBundle\Form\Handler\Actor\ActorFormHandler
+        calls:
+           - [setNewActorFormHandlerStrategy, ['@app.new_actor.form.handler.strategy']]
+           - [setUpdateActorFormHandlerStrategy, ['@app.update_actor.form.handler.strategy']]
+
+    app.new_actor.form.handler.strategy:
+        class: AppBundle\Form\Handler\Actor\NewActorFormHandlerStrategy
+        arguments:
+            - "@translator"
+            - "@app.actor.manager"
+            - "@form.factory"
+            - "@router"
+
+    app.update_actor.form.handler.strategy:
+        class: AppBundle\Form\Handler\Actor\UpdateActorFormHandlerStrategy
+        arguments:
+            - "@translator"
+            - "@app.actor.manager"
+            - "@form.factory"
+            - "@router"
+
+    app.actor_search.form:
+            class: AppBundle\Form\Type\ActorSearchFormType
+            tags:
+                - { name: form.type }
+
+
+    app.request_contact.handler:
+        class: AppBundle\Form\Handler\Contact\ContactFormHandler
+        arguments: ['@app.contact.manager']
+
+    app.contact.form:
+            class: AppBundle\Form\Type\ContactType
+            tags:
+                - { name: form.type }
+
+
+    app.hashtag.collection.form:
+        class: AppBundle\Form\Type\HashTagCollectionType
+        arguments: ["%app.max_hashtag_limit%"]
+        tags:
+            - { name: form.type }
+
+    app.hashtag.form:
+        class: AppBundle\Form\Type\HashTagType
+        tags:
+            - { name: form.type }

@@ -1,0 +1,39 @@
+<div class="container">
+	{% if displayActorsFound %}
+		<h2>{{ 'acteur.trouve' | transchoice(nbFilteredActors) }}</h2>
+	{% endif %}
+	<table class="table table-striped">
+		<thead>
+		<tr>
+			<th>{{ 'acteur.prenom' | trans }}</th>
+			<th>{{ 'acteur.nom' | trans }}</th>
+			<th>{{ 'acteur.dateNaissance' | trans }}</th>
+			<th>{{ 'acteur.sexe' | trans }}</th>
+		</tr>
+		</thead>
+		<tbody>
+		{% for a in actors %}
+			<tr>
+			<td>{{ a.firstName }}</td>
+			<td>{{ a.lastName }}</td>
+			<td>{{ a.birthday|date('d/m/Y') }}</td>
+			<td>{{ a.sex }}</td>
+			{% if is_granted('ROLE_EDITOR') %}
+				<td><a href="{{ path('actor_edit', { 'id': a.id }) }}">{{ 'modifier' | trans({}, 'divers') }}</a></td>
+			{% endif %}
+			{% if is_granted('ROLE_ADMIN') %}
+				<td><a href="{{ path('actor_delete', { 'id': a.id }) }}">{{ 'supprimer' | trans({}, 'divers') }}</a></td>
+			{% endif %}
+		{% endfor %}
+		</tbody>
+	</table>
+
+	{% if is_granted('ROLE_EDITOR') %}
+	<p><a href="{{ path('actor_new') }}">{{ 'acteur.ajouter'|trans }}</a><p>
+		{% endif %}
+</div>
+{% if pagination is defined and pagination is not null %}
+	<div style="text-align: center">
+		{% include 'pagination/pagination.html.twig' with {'pagination' : pagination} %}
+	</div>
+{% endif %}

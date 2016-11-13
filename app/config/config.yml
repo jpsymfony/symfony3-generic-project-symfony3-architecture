@@ -1,12 +1,27 @@
 imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
+    - { resource: form.yml }
+    - { resource: listener.xml }
+    - { resource: mail_blacklist.yml }
+    - { resource: manager.yml }
+    - { resource: repository.yml }
+    - { resource: services.xml }
     - { resource: services.yml }
+    - { resource: twig.xml }
+    - { resource: validator.yml }
+    - { resource: user/authentication.yml }
+    - { resource: user/form.xml }
+    - { resource: user/listener.xml }
+    - { resource: user/manager.xml }
+    - { resource: user/repository.xml }
+    - { resource: user/services.yml }
 
 # Put parameters here that don't need to change on each machine where the app is deployed
 # http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: fr
+    redirection_url_after_access_denied_exception: homepage
 
 framework:
     #esi: ~ # Pour utiliser les tags ESI dans les templates Twig
@@ -96,6 +111,13 @@ stof_doctrine_extensions:
             timestampable: true
             sluggable: true
 
+liip_imagine:
+    filter_sets:
+        movie_thumbnail:
+            quality: 100
+            filters:
+                relative_resize: { widen: 200 }
+
 services:
     twig.extension.intl:
             class: Twig_Extensions_Extension_Intl
@@ -118,22 +140,12 @@ services:
             tags:
                 - { name: twig.extension }
 
-liip_imagine:
-    filter_sets:
-        movie_thumbnail:
-            quality: 100
-            filters:
-                relative_resize: { widen: 200 }
-
 fos_user:
     db_driver: orm
     firewall_name: main
-    user_class: App\BackUserBundle\Entity\User
+    user_class: AppBundle\Entity\BackUser
 
-app_portal:
+app:
     max_hashtag_limit: 3
     max_movies_per_page: 5
     max_actors_per_page: 5
-
-app_user:
-    redirection_url_after_access_denied_exception: homepage

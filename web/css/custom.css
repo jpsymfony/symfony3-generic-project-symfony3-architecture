@@ -107,3 +107,14 @@ div.marketing > form > div:nth-child(6) > div > div > ul,
 div.marketing > form > div:nth-child(7) > div > div > ul {
     width: 200px;
 }
+
+#movie_description {
+    height: 300px;
+}
+
+.loading {
+    background:url('../images/loading.gif') no-repeat top left;
+    width: 36px;
+    height: 36px;
+    display: none;
+}

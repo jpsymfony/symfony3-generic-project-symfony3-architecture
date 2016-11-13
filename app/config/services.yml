@@ -1,13 +1,13 @@
 services:
     kernel.listener.console_exception:
-            class: App\CoreBundle\EventListener\ConsoleExceptionListener
+            class: Jpsymfony\CoreBundle\EventListener\ConsoleExceptionListener
             arguments:
                 logger: '@logger'
             tags:
                 - { name: kernel.event_listener, event: console.exception }
 
     kernel.listener.console_terminate_dispatch:
-            class: App\CoreBundle\EventListener\ErrorLoggerListener
+            class: Jpsymfony\CoreBundle\EventListener\ErrorLoggerListener
             arguments:
                 logger: '@logger'
             tags:

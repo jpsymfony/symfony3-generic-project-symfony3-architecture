@@ -1,0 +1,15 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}{{ 'acteur.liste'|trans() }}{% endblock %}
+
+{% block active_actors %}active{% endblock %}
+
+{% form_theme form "bootstrap_3_layout.html.twig" %}
+
+{% block content %}
+    {{ form(form, { attr: { novalidate: 'novalidate' } }) }}
+<div class="loading"></div>
+<div id="resultats_recherche">
+    {% include 'actor/partials/actors.html.twig' with {'actors' : actors, 'displayActorsFound': displayActorsFound, 'pagination': pagination}  %}
+</div>
+{% endblock %}

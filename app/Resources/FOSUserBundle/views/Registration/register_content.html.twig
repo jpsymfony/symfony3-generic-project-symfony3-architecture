@@ -21,22 +21,22 @@
             {{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register'}}) }}
                 <div id="fos_user_registration_form">
                     <p>
-                        {{ form_label(form.email, 'Email') }}  
+                        {{ form_label(form.email, 'form.email') }}
                         {{ form_widget(form.email, { 'attr': {'class': 'text-input small-input validate[required]'} }) }}
                         {{ form_errors(form.email) }}
                     </p>
                     <p>
-                        {{ form_label(form.username, 'Username') }}  
+                        {{ form_label(form.username, 'form.username') }}
                         {{ form_widget(form.username, { 'attr': {'class': 'text-input small-input validate[required]'} }) }}
                         {{ form_errors(form.username) }}
                     </p>
                     <p>
-                        {{ form_label(form.plainPassword.first, 'Password') }}
+                        {{ form_label(form.plainPassword.first, 'form.password') }}
                         {{ form_widget(form.plainPassword.first, { 'attr': {'class': 'text-input small-input validate[required]'} }) }}
                         {{ form_errors(form.plainPassword.first) }}
                     </p>
                     <p>
-                        {{ form_label(form.plainPassword.second, 'Verification') }}
+                        {{ form_label(form.plainPassword.second, 'form.password_confirmation') }}
                         {{ form_widget(form.plainPassword.second, { 'attr': {'class': 'text-input small-input validate[required]'} }) }}
                     </p>
                     <div>

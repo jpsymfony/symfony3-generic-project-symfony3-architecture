@@ -1,22 +1,7 @@
-app_user:
-    resource: "@AppUserBundle/Controller/"
+app:
+    resource: "@AppBundle/Controller/"
     type:     annotation
     prefix:   /
-
-app_portal:
-    resource: "@AppPortalBundle/Controller/"
-    type:     annotation
-    prefix:   /
-
-app_backoffice:
-    resource: "@AppAdminBundle/Controller/"
-    type:     annotation
-    prefix:   /back
-
-app_backuser:
-    resource: "@AppBackUserBundle/Controller/"
-    type:     annotation
-    prefix:   /back
 
 fos_:
     resource: "@FOSUserBundle/Resources/config/routing/all.xml"

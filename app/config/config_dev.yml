@@ -55,17 +55,17 @@ monolog:
 assetic:
     use_controller: true
 
-app_portal:
-       payment_organisms:
-           default: Paypal
-           Be2bill:
-               identifier: MYWEBSITE
-               password: 123456789
-               url: https://secure-test.be2bill.com/front/form/process
-           Paypal:
-               identifier: mywebsite@mywebsite.com
-               password: ~
-               url: http://www.sandbox.paypal.com/cgi-bin/webscr
+app:
+   payment_organisms:
+       default: Paypal
+       Be2bill:
+           identifier: MYWEBSITE
+           password: 123456789
+           url: https://secure-test.be2bill.com/front/form/process
+       Paypal:
+           identifier: mywebsite@mywebsite.com
+           password: ~
+           url: http://www.sandbox.paypal.com/cgi-bin/webscr
 swiftmailer:
     encryption: ssl
     auth_mode:  login
