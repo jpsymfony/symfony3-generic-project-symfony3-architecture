@@ -1,5 +1,5 @@
 {
-    "name": "johnsaulnier/generic.project.symfony3.niveau2",
+    "name": "jpsymfony/generic.project.symfony3.niveau2",
     "license": "proprietary",
     "type": "project",
     "autoload": {
