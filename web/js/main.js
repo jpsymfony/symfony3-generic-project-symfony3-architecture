@@ -48,7 +48,7 @@ $("#form_recherche").submit(function (e) {
     });
 });
 
-$("#actor_birthday").datepicker({
+/*$("#actor_birthday").datepicker({
     changeMonth: true,
     changeYear: true,
     showButtonPanel: true,
@@ -65,7 +65,7 @@ $('#movie_filter_releaseDateFrom').datepicker( {
     changeMonth: true,
     changeYear: true,
     showButtonPanel: true,
-    dateFormat: 'dd-mm-yy',
+    dateFormat: 'yy-mm-dd',
     yearRange: "-50:+0",
     onClose: function(dateText, inst) {
         $(this).datepicker('setDate', new Date(inst.selectedYear, inst.selectedMonth, inst.selectedDay));
@@ -76,12 +76,12 @@ $('#movie_filter_releaseDateTo').datepicker({
     changeMonth: true,
     changeYear: true,
     showButtonPanel: true,
-    dateFormat: 'dd-mm-yy',
+    dateFormat: 'yy-mm-dd',
     yearRange: "-50:+0",
     onClose: function(dateText, inst) {
         $(this).datepicker('setDate', new Date(inst.selectedYear, inst.selectedMonth, inst.selectedDay));
     }
-});
+});*/
 
 $('#contact_other').hide();
 

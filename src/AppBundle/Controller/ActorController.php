@@ -11,6 +11,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use AppBundle\Entity\Actor;
+use Symfony\Component\HttpFoundation\Response;
 
 class ActorController extends Controller
 {
@@ -39,31 +40,47 @@ class ActorController extends Controller
         ];
 
         if ($request->isXmlHttpRequest()) {
-            return $this->get('templating')->renderResponse('actor/partials/actors.html.twig', $data);
+            return new Response('TODO');
         }
 
         return array_merge($data, ['form' => $this->getActorManager()->getActorSearchForm()->createView()]);
     }
 
     /**
-     * @Template("actor/partials/actors.html.twig", vars={"actors", "displayActorsFound"})
-     * @ParamConverter("actors", converter="project_collection_converter", options={"manager":"app.actor.manager", "orderby":"birthday"})
+     * @Template("actor/partials/actors.html.twig")
      */
-    public function topAction(ArrayCollection $actors, $max = 5, $displayActorsFound = false)
+    public function topAction()
     {
+        $max = 3;
+        $displayActorsFound = false;
+
+        $actors = $this->getActorManager()->findBy([], ['birthday'=> 'asc'], $max);
+
+        return [
+            'actors' => $actors,
+            'displayActorsFound' => $displayActorsFound,
+        ];
     }
 
     /**
      * @Route("/admin/actors/new", name="actor_new")
      * @Route("/admin/actors/{id}/edit", name="actor_edit")
      * @param Request $request
-     * @param Actor|null $actor
      * @return array|RedirectResponse
      * @Template("actor/edit.html.twig")
-     * @Security("has_role('ROLE_EDITOR')")
      */
-    public function newEditAction(Request $request, Actor $actor = null)
+    public function newEditAction(Request $request)
     {
+        $id = $request->attributes->get('id');
+        $actor = null;
+
+        if (!is_null($id)) {
+            $actor = $this->getActorManager()->find($id);
+            if (!$actor) {
+                throw $this->createNotFoundException('Actor ' . $id . ' not found');
+            }
+        }
+
         $entityToProcess = $this->getActorFormHandler()->processForm($actor);
 
         if ($this->getActorFormHandler()->handleForm($this->getActorFormHandler()->getForm(), $entityToProcess, $request)) {
@@ -81,19 +98,19 @@ class ActorController extends Controller
 
     /**
      * @Route("/admin/actors/{id}/delete", name="actor_delete")
-     * @param Actor $actor
-     * @ParamConverter("actor", class="AppBundle:Actor")
      * @return RedirectResponse
      */
-    public function deleteAction(Actor $actor)
+    public function deleteAction($id)
     {
-        if (!$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
-            throw $this->createAccessDeniedException('You cannot access this page!');
+        $actor = $this->getActorManager()->find($id);
+
+        if (!$actor) {
+            throw $this->createNotFoundException('Actor ' . $id . ' not found');
         }
         $this->getActorManager()->remove($actor);
         $this->addFlash('success', $this->get('translator')->trans('acteur.supprime', ['%actor%' => $actor]));
 
-        return new RedirectResponse($this->get('router')->generate('actors_list'));
+        return new RedirectResponse($this->container->get('router')->generate('actors_list'));
     }
 
     public function getActorFormHandler()

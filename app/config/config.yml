@@ -21,7 +21,7 @@ imports:
 # http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: fr
-    redirection_url_after_access_denied_exception: homepage
+    #redirection_url_after_access_denied_exception: homepage
 
 framework:
     #esi: ~ # Pour utiliser les tags ESI dans les templates Twig
@@ -144,6 +144,9 @@ fos_user:
     db_driver: orm
     firewall_name: main
     user_class: AppBundle\Entity\BackUser
+    from_email:
+        address:        '%email_from%'
+        sender_name:    Admin
 
 app:
     max_hashtag_limit: 3

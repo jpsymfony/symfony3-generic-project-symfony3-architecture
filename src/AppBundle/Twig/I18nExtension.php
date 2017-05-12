@@ -13,7 +13,6 @@ class I18nExtension extends \Twig_Extension
     public function getFilters()
     {
         return array(
-            new \Twig_SimpleFilter('formatTime', array($this, 'formatTime')),
             new \Twig_SimpleFilter('price', array($this, 'priceFilter')),
             new \Twig_SimpleFilter('formatSingleDayPart', array($this, 'formatSingleDayPart')),
         );
@@ -33,17 +32,6 @@ class I18nExtension extends \Twig_Extension
     public static function getDefault()
     {
         return self::get(\Locale::getDefault());
-    }
-
-    public static function formatTime($time, $format = ':')
-    {
-        $timeParts = explode($format, $time);
-
-        if (1 === count($timeParts)) {
-            throw new \Exception('You did not used a format such as :');
-        }
-
-        return $timeParts[0] . self::getDefault() . $timeParts[1];
     }
 
     public static function formatSingleDayPart($daypart)

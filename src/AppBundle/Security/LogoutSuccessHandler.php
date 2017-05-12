@@ -28,14 +28,6 @@ class LogoutSuccessHandler implements LogoutHandlerInterface
     
     public function logout(Request $request, Response $response, TokenInterface $token)
     {
-        $user = $token->getUser();
-        $this->logger->info("User " . $user->getEmail() . " has been logged out");
-
-        $response->headers->setCookie(new Cookie('success_connection', '', time() - 3600));
-
-        $this->userManager->setLastConnexion($user, new \DateTime('now'));
-        $this->userManager->save($user, false, true);
-
         return $response;
     }
 }

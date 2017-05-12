@@ -10,7 +10,7 @@
             <tr>
                 <td>{{ movie.title }}</td>
                 <td><a href="{{ path('movie_show', { 'id': movie.id }) }}">{{ 'voir' | trans({}, 'divers') }}</a></td>
-                {% if is_granted('ROLE_EDITOR') and is_granted('edit', movie) %}
+                {% if is_granted('ROLE_EDITOR') %}
                     <td><a href="{{ path('movie_edit', { 'id': movie.id }) }}">{{ 'modifier' | trans({}, 'divers') }}</a></td>
                 {% endif %}
                 {% if is_granted('ROLE_ADMIN') %}

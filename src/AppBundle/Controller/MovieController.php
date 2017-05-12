@@ -32,6 +32,16 @@ class MovieController extends Controller
         $requestVal = $request->query->all();
         $limit = $this->getParameter('app.max_movies_per_page');
 
+        // really dirty but will be removed with the datepicker
+        $currentRequestVal = current($requestVal);
+        if (!empty($currentRequestVal['releaseDateFrom']) && is_array($currentRequestVal['releaseDateFrom'])) {
+            $currentRequestVal['releaseDateFrom'] = (new \DateTime($currentRequestVal['releaseDateFrom']['year'] . '-' . $currentRequestVal['releaseDateFrom']['month'] . '-' . $currentRequestVal['releaseDateFrom']['day']))->format('Y-m-d');
+        }
+        if (!empty($currentRequestVal['releaseDateTo']) && is_array($currentRequestVal['releaseDateTo'])) {
+            $currentRequestVal['releaseDateTo'] = (new \DateTime($currentRequestVal['releaseDateTo']['year'] . '-' . $currentRequestVal['releaseDateTo']['month'] . '-' . $currentRequestVal['releaseDateTo']['day']))->format('Y-m-d');
+        }
+        // end block to remove
+
         $movies = $this->getMovieManager()->getResultFilterPaginated(current($requestVal), $limit, ($page - 1) * $limit);
         $nbFilteredMovies = $this->getMovieManager()->getResultFilterCount(current($requestVal));
         $pagination = $this->getMovieManager()->getPagination($requestVal, $page, 'movie_list', $limit, $nbFilteredMovies);
@@ -43,29 +53,27 @@ class MovieController extends Controller
     }
 
     /**
-     * @Template("movie/partials/movies.html.twig", vars={"movies"})
-     * @ParamConverter("movies", converter="project_collection_converter", options={"manager":"app.movie.manager", "orderby":"title", "dir":"desc"})
-     * @param ArrayCollection $movies
-     * @param int $max
+     * @Template("movie/partials/movies.html.twig")
      */
-    public function topAction(ArrayCollection $movies, $max = 5)
+    public function topAction($max = 5)
     {
+        $movies = $this->getDoctrine()->getRepository(Movie::class)->findBy([], ['title'=> 'asc'], $max);
+
+        return [
+            'movies' => $movies,
+        ];
     }
 
     /**
      * @Route("/movies/{id}/show", name="movie_show")
-     * @ParamConverter("movie", class="AppBundle:Movie")
-     * @param Movie $movie
-     * @return Response
-     * @Security("has_role('ROLE_VISITOR')")
-     * @Cache(smaxage=600)
      */
-    public function showAction(Movie $movie)
+    public function showAction($id)
     {
-        $response = new Response();
-        $response->setEtag(md5($movie->getId() . $movie->getUpdatedAt()->format('YmdHis') . microtime(true)));
+        $movie = $this->getMovieManager()->find($id);
 
-        return $this->render('movie/show.html.twig', ['movie' => $movie], $response);
+        if (!$movie) {
+            throw $this->createNotFoundException('Movie ' . $id . ' not found');
+        }
     }
 
     /**
@@ -73,13 +81,20 @@ class MovieController extends Controller
      * @Route("/admin/movies/{id}/edit", name="movie_edit")
      * @Template("movie/edit.html.twig")
      * @param Request $request
-     * @param Movie|null $movie
      * @return array|RedirectResponse
-     * @ParamConverter("movie", class="AppBundle:Movie")
-     * @Security("has_role('ROLE_EDITOR')")
      */
-    public function newEditAction(Request $request, Movie $movie = null)
+    public function newEditAction(Request $request)
     {
+        $id = $request->attributes->get('id');
+        $movie = null;
+
+        if (!is_null($id)) {
+            $movie = $this->getMovieManager()->find($id);
+            if (!$movie) {
+                throw $this->createNotFoundException('Movie ' . $id . ' not found');
+            }
+        }
+
         $entityToProcess = $this->getMovieFormHandler()->processForm($movie);
 
         if ($this->getMovieFormHandler()->handleForm($this->getMovieFormHandler()->getForm(), $entityToProcess, $request)) {
@@ -97,15 +112,16 @@ class MovieController extends Controller
 
     /**
      * @Route("/admin/movies/{id}/delete", name="movie_delete")
-     * @ParamConverter("movie", class="AppBundle:Movie")
-     * @param Movie $movie
      * @return RedirectResponse
      */
-    public function deleteAction(Movie $movie)
+    public function deleteAction($id)
     {
-        if (!$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
-            throw $this->createAccessDeniedException('You cannot access this page!');
+        $movie = $this->getDoctrine()->getManager()->getRepository(Movie::class)->find($id);
+
+        if (!$movie) {
+            throw $this->createNotFoundException('Movie ' . $id . ' not found');
         }
+
         $this->getMovieManager()->remove($movie);
         $this->addFlash('success', $this->get('translator')->trans('film.supprime', ['%title%' => $movie->getTitle()]));
 

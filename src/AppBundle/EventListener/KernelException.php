@@ -49,9 +49,7 @@ class KernelException
             $exception instanceof AccessDeniedException ||
             $exception instanceof InsufficientAuthenticationException
         ) {
-            $this->session->getFlashBag()->add('error', $exception->getMessage());
-            $url = $this->router->generate($this->urlRedirectionException);
-            $event->setResponse(new RedirectResponse($url));
+
         }
     }
 }

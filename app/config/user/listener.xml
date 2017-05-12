@@ -26,13 +26,13 @@
             <tag name="kernel.event_listener" event="app.new_password_requested" method="onRequestedPassword" />
         </service>
 
-        <service id="app.user_kernel_exception"
+        <!--<service id="app.user_kernel_exception"
                  class="AppBundle\EventListener\KernelException">
             <argument type="service" id="router"/>
             <argument type="service" id="session"/>
             <argument>%redirection_url_after_access_denied_exception%</argument>
             <tag name="kernel.event_listener" event="kernel.exception" />
-        </service>
+        </service>-->
 
         <service id="app.user_kernel_controller" class="AppBundle\EventListener\KernelController">
             <argument type="service" id="security.authorization_checker"/>

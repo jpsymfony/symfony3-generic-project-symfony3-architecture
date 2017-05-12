@@ -3,6 +3,7 @@
 namespace AppBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -51,20 +52,8 @@ class MovieFilterType extends AbstractType
                 ->add('description', TextType::class, array(
                     'label' => 'film.description',
                 ))
-                ->add('releaseDateFrom', TextType::class,
-                    array(
-                        'attr' => array('class' => 'datepicker', 'readonly' => true),
-                        'label' => 'film.dateSortieDebut',
-                        'mapped' => false,
-                    )
-                )
-                ->add('releaseDateTo', TextType::class,
-                    array(
-                        'attr' => array('class' => 'datepicker', 'readonly' => true),
-                        'label' => 'film.dateSortieFin',
-                        'mapped' => false,
-                    )
-                );
+                ->add('releaseDateFrom', BirthdayType::class, array('mapped' => false, 'years' => range(date('Y') - 50, date('Y'))))
+                ->add('releaseDateTo', BirthdayType::class, array('mapped' => false, 'years' => range(date('Y') - 50, date('Y'))));
     }
 
     public function configureOptions(OptionsResolver $resolver)

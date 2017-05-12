@@ -9,7 +9,9 @@
     <div style="text-align: center">
         <h2>{{ 'film.liste'|trans() }}</h2>
     </div>
-    {% include 'movie/partials/movies.html.twig' with {'movies' : movies}  %}
+
+
+
     {% if is_granted('ROLE_EDITOR') %}
         <p><a href="{{ path('movie_new') }}">{{ 'film.ajouter'|trans }}</a><p>
     {% endif %}

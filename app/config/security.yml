@@ -65,9 +65,9 @@ security:
                 # Secure the login form against CSRF
                 # Reference: http://symfony.com/doc/current/cookbook/security/csrf_in_login_form.html
                 csrf_token_generator: security.csrf.token_manager
-                failure_path: security_login_form
-                success_handler: security_authentication_success_handler
-                failure_handler: security_authentication_failure_handler
+                #failure_path: security_login_form
+                #success_handler: security_authentication_success_handler
+                #failure_handler: security_authentication_failure_handler
                 default_target_path: user_dashboard
                 always_use_default_target_path: true
             logout:
@@ -75,14 +75,14 @@ security:
                 path: security_logout
                 # The name of the route to redirect to after logging out
                 target: homepage
-                handlers: [security_logout_success_handler]
+                #handlers: [security_logout_success_handler]
                 invalidate_session: false
 
-    access_decision_manager:
+    #access_decision_manager:
         #   affirmative (default) => This grants access as soon as there is one voter granting access;
         #   consensus => This grants access if there are more voters granting access than denying;
         #   unanimous => This only grants access once all voters grant access.
-        strategy: affirmative
+    #    strategy: affirmative
 
     access_control:
         - { path: ^/account/register, roles: IS_AUTHENTICATED_ANONYMOUSLY }

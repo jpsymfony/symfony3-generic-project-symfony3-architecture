@@ -8,6 +8,8 @@ use AppBundle\Entity\Manager\Interfaces\MovieManagerInterface;
 use AppBundle\Entity\Movie;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -41,17 +43,7 @@ class MovieType extends AbstractType
             ->add('description', TextareaType::class, array('label' => 'film.description'))
             // if an image has previously been uploaded, we populate the movie object with database values
             ->add('image', ImageType::class, array('data' => $options['image']))
-            ->add(
-                $builder->create(
-                    'releasedAt', TextType::class,
-                    array(
-                        'attr' => array('class' => 'datepicker', 'readonly' => true),
-                        'label' => 'film.dateSortie',
-                    )
-                )
-                    ->addModelTransformer(new TextToDateTimeDataTransformer())
-            )
-
+            ->add('releasedAt', BirthdayType::class)
 	        ->add('category', EntityType::class, array(
 		        'class' => 'AppBundle\Entity\Category',
 		        'multiple' => false,
@@ -83,32 +75,6 @@ class MovieType extends AbstractType
             'attr' => ['class' => 'btn btn-primary btn-lg btn-block'],
             'label' => 'valider'
         ));
-
-       $builder->addEventListener(
-            FormEvents::POST_SUBMIT,
-            function (FormEvent $event) {
-                // object movie data from the form
-                $data = $event->getData();
-
-                if (!$data instanceof Movie) {
-                    throw new \RuntimeException('Movie instance required.');
-                }
-
-                $dbMovie = null;
-                if (null !== $data->getId()) {
-                    $dbMovie = $this->handler->find($data->getId());
-                }
-
-                // if movie creation or no image in database for updated movie AND no file uploaded, we set image attribute to null
-                if ((null === $dbMovie || null === $dbMovie->getImage()->getId()) &&
-                    null === $event->getForm()->getData()->getImage()->getFile()
-                ) {
-                    $data->setImage(null);
-                }
-
-
-            }
-        );
     }
 
     public function configureOptions(OptionsResolver $resolver)

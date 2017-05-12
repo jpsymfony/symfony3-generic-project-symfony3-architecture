@@ -1,7 +1,7 @@
 services:
-    app.movie_voter:
-        class: AppBundle\Security\MovieVoter
-        arguments: ['@security.access.decision_manager']
-        public:     false
-        tags:
-            - { name: security.voter }
+#    app.movie_voter:
+#        class: AppBundle\Security\MovieVoter
+#        arguments: ['@security.access.decision_manager']
+#        public:     false
+#        tags:
+#            - { name: security.voter }

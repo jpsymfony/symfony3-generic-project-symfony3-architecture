@@ -229,19 +229,4 @@ class Contact
     {
         return $this->other;
     }
-
-    /**
-     * @param ExecutionContextInterface $context
-     * @Assert\Callback
-     */
-    public function validate(ExecutionContextInterface $context)
-    {
-        if ($this->getKnowledge() == 'autre' && $this->getOther() == null) {
-            $context->buildViolation(
-                "Vous devez remplir ce champ si vous avez coché 'autre'"
-            )
-                ->atPath('other')
-                ->addViolation();
-        }
-    }
 }

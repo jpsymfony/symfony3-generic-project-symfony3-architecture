@@ -68,12 +68,6 @@ class UpdateMovieFormHandlerStrategy extends AbstractMovieFormHandlerStrategy
      */
     public function handleForm(Request $request, Movie $movie, ArrayCollection $originalHashTags = null)
     {
-        if (!$this->authorizationChecker->isGranted(MovieVoter::EDIT, $movie)) {
-            $errorMessage = $this->translator->trans('film.modifier.erreur', ['%movie%' => $movie->getTitle()]);
-
-            throw new AccessDeniedException($errorMessage);
-        }
-
         foreach ($originalHashTags as $hashTag) {
             if (false === $movie->getHashTags()->contains($hashTag)) {
                 $movie->removeHashTag($hashTag);

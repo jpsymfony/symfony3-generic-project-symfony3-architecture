@@ -3,7 +3,6 @@
 namespace AppBundle\Entity\Registration;
 
 use Symfony\Component\Validator\Constraints as Assert;
-use Jpsymfony\CoreBundle\Validator\Constraints as CoreAssert;
 use AppBundle\Validator\Constraints as AppAssert;
 use AppBundle\Entity\User;
 
@@ -11,10 +10,6 @@ class Registration
 {
     /**
      * @Assert\NotBlank()
-     * @CoreAssert\UniqueAttribute(
-     *      repository="AppBundle\Entity\User",
-     *      property="username"
-     * )
      */
     private $username;
 
@@ -27,10 +22,6 @@ class Registration
     /**
      * @Assert\NotBlank(message = "registration.email.notblank")
      * @Assert\Email()
-     * @CoreAssert\UniqueAttribute(
-     *      repository="AppBundle\Entity\User",
-     *      property="email"
-     * )
      * @AppAssert\EmailBlackList()
      */
     private $email;

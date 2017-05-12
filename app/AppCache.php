@@ -38,10 +38,10 @@ class AppCache extends HttpCache
      *                            Cache-Control (cf. RFC 5961).
      *
      */
-    protected function getOptions()
+    /*protected function getOptions()
     {
         return array(
             'debug' => true,
         );
-    }
+    }*/
 }

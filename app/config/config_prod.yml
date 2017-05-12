@@ -1,15 +1,17 @@
 imports:
     - { resource: config.yml }
 
-framework:
-    router:
-        resource: "%kernel.root_dir%/config/routing_dev.yml"
-        strict_requirements: true
-    profiler: { only_exceptions: false }
+#framework:
+#    validation:
+#        cache: validator.mapping.cache.apc
+#    serializer:
+#        cache: serializer.mapping.cache.apc
 
-web_profiler:
-    toolbar: true
-    intercept_redirects: false
+#doctrine:
+#    orm:
+#        metadata_cache_driver: apc
+#        result_cache_driver: apc
+#        query_cache_driver: apc
 
 monolog:
     handlers:
@@ -38,50 +40,43 @@ monolog:
             max_files:      15
             path:           "%kernel.logs_dir%/%kernel.environment%.error.log"
             level:          info
+        main_critical:
+            type:           fingers_crossed
+            action_level:   critical
+            handler:        grouped_critical
+        grouped_critical:
+            type:           group
+            members:        [streamed_critical, buffered_critical]
         streamed_critical:
             type:           rotating_file
             max_files:      15
             path:           "%kernel.logs_dir%/%kernel.environment%.critical.log"
-            level:          critical
+            level:          info
+        buffered_critical:
+            type:           buffer
+            handler:        swift_critical
+        swift_critical:
+            type:           swift_mailer
+            from_email:     contact@mywebsiteprod.com
+            to_email:       jpsymfony@free.fr
+            subject:        Une erreur critique est survenue !
+            level:          info
         console:
             type:   console
             verbosity_levels:
                 VERBOSITY_NORMAL: NOTICE
             #formatter: mywebsite_formatter
 
-#swiftmailer:
-#    delivery_address: me@example.com
-
-assetic:
-    use_controller: true
 
 app:
+   max_hashtag_limit: 8
    payment_organisms:
-       default: Paypal
+       default: Be2bill
        Be2bill:
-           identifier: MYWEBSITE
-           password: 123456789
-           url: https://secure-test.be2bill.com/front/form/process
+           identifier: MYWEBSITE_PROD
+           password: 987654321
+           url: https://secure-magenta1.be2bill.com/front/form/process.php
        Paypal:
-           identifier: mywebsite@mywebsite.com
+           identifier: mywebsite-prod@mywebsiteprod.com
            password: ~
-           url: http://www.sandbox.paypal.com/cgi-bin/webscr
-
-swiftmailer:
-    encryption: ssl
-    auth_mode:  login
-    spool:      { type: memory }
-
-web_profiler_extra:
-    routing:
-        enabled:        true
-        display_in_wdt: true
-    container:
-        enabled:        true
-        display_in_wdt: true
-    assetic:
-        enabled:        true
-        display_in_wdt: true
-    twig:
-        enabled:        true
-        display_in_wdt: true
+           url: http://www.paypal.com/cgi-bin/webscr

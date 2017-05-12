@@ -1,42 +1,32 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>{% block title %}Portal{% endblock %}</title>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Portal{% endblock %}</title>
 
-        {% stylesheets filter='cssrewrite'
-            'css/main.css'
-            'css/custom.css'
-            'css/bootstrap-multiselect.css'
-        filter='yui_css' %}
-        <link rel="stylesheet" href="{{ asset_url }}">
-        {% endstylesheets %}
+    {% block stylesheets %}
+        <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/bootstrap-theme.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('js/jquery-ui/jquery-ui.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/main.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/bootstrap-multiselect.css') }}">
+    {% endblock %}
+    <link rel="icon" type="image/x-icon" href="{{ asset('images/favicon.ico') }}">
+</head>
 
-        {% block stylesheets %}
-            <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
-            <link rel="stylesheet" href="{{ asset('css/bootstrap-theme.min.css') }}">
-            <link rel="stylesheet" href="{{ asset('js/jquery-ui/jquery-ui.min.css') }}">
-        {% endblock %}
-        <link rel="icon" type="image/x-icon" href="{{ asset('images/favicon.ico') }}">
-    </head>
+<body>
+{% block body %}{% endblock %}
 
-    <body>
-        {% block body %}{% endblock %}
-
-        {% block javascripts %}
-            <script src="{{ asset('js/jquery-1.11.1.min.js') }}"></script>
-            <script src="{{ asset('js/jquery-ui/jquery-ui.min.js') }}"></script>
-            <script src="{{ asset('js/bootstrap.min.js') }}"></script>
-            <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
-            <script src="{{ asset('js/bootstrap-multiselect.js') }}"></script>
-        {% endblock %}
-
-        {% javascripts
-        'js/main.js'
-        'js/fos_js_routes.js'
-        filter='yui_js' %}
-        <script src="{{ asset_url }}"></script>
-        {% endjavascripts %}
-    </body>
+{% block javascripts %}
+    <script src="{{ asset('js/jquery-1.11.1.min.js') }}"></script>
+    <script src="{{ asset('js/jquery-ui/jquery-ui.min.js') }}"></script>
+    <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+    <script src="{{ asset('js/bootstrap-multiselect.js') }}"></script>
+    <script src="{{ asset('js/main.js') }}"></script>
+    <script src="{{ asset('js/fos_js_routes.js') }}"></script>
+{% endblock %}
+</body>
 </html>

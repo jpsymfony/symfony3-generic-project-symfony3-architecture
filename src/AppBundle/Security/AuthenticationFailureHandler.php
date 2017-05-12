@@ -22,8 +22,6 @@ class AuthenticationFailureHandler extends DefaultAuthenticationFailureHandler
 
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception)
     {
-        $this->logger->error('authentication error with user ' . $request->request->get('_username'));
-
         return parent::onAuthenticationFailure($request, $exception);
     }
 }

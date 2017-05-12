@@ -40,7 +40,6 @@ class LanguageController extends Controller
         }
 
         $response = new RedirectResponse($url, 302);
-        $response->headers->setCookie(new Cookie('_locale', $language, $dateExpire));
 
         return $response;
     }
