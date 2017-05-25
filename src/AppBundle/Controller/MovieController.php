@@ -42,8 +42,8 @@ class MovieController extends Controller
         }
         // end block to remove
 
-        $movies = $this->getMovieManager()->getResultFilterPaginated(current($requestVal), $limit, ($page - 1) * $limit);
-        $nbFilteredMovies = $this->getMovieManager()->getResultFilterCount(current($requestVal));
+        $movies = $this->getMovieManager()->getResultFilterPaginated($currentRequestVal, $limit, ($page - 1) * $limit);
+        $nbFilteredMovies = $this->getMovieManager()->getResultFilterCount($currentRequestVal);
         $pagination = $this->getMovieManager()->getPagination($requestVal, $page, 'movie_list', $limit, $nbFilteredMovies);
 
         return [
@@ -69,11 +69,13 @@ class MovieController extends Controller
      */
     public function showAction($id)
     {
-        $movie = $this->getMovieManager()->find($id);
+        $movie = $this->getDoctrine()->getRepository(Movie::class)->find($id);
 
         if (!$movie) {
             throw $this->createNotFoundException('Movie ' . $id . ' not found');
         }
+
+        return $this->render('movie/show.html.twig', ['movie' => $movie]);
     }
 
     /**

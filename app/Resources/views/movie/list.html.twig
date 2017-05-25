@@ -10,8 +10,6 @@
         <h2>{{ 'film.liste'|trans() }}</h2>
     </div>
 
-
-
     {% if is_granted('ROLE_EDITOR') %}
         <p><a href="{{ path('movie_new') }}">{{ 'film.ajouter'|trans }}</a><p>
     {% endif %}

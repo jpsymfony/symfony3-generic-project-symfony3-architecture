@@ -1,4 +1,4 @@
-{% extends '@AppPortal/layout.html.twig' %}
+{% extends 'layout.html.twig' %}
 
 {% block title %}{{ 'film.fiche'|trans({ '%titre%': movie.title}) }}{% endblock %}
 
@@ -10,7 +10,7 @@
         <p>(mis à jour le {{ movie.updatedAt | localizeddate('medium', 'none')}} à {{ movie.updatedAt|date("h:i") }})</p>
         <div class="movie-metadata">
             <table class="metadata table table-bordered">
-                <tr><th>{{ 'film.horaire' | trans }}</th><td> {{ '14h-16h' }}</td></tr>
+                <tr><th>{{ 'film.horaire' | trans }}</th><td> {{ '14h-16h' }} 5.5 €</td></tr>
                 <tr><th>{{ 'film.dateSortie' | trans }}</th><td>{{ movie.releasedAt | date("d/m/Y") }}</td></tr>
                 <tr>
                     <th>{{ 'film.categorie'|trans }}</th>
@@ -33,7 +33,7 @@
                         <th>{{ 'film.image'|trans }}</th>
                         <td>
                             <img
-                                    src="{{ asset(movie.image.getWebPath | apply_filter('movie_thumbnail')) }}"
+                                    src="{{ asset(movie.image.getWebPath | imagine_filter('movie_thumbnail')) }}"
                                     alt="{{ movie.image.alt }}"
                             />
                         </td>
