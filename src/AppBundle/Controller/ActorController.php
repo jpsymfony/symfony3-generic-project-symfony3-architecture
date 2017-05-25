@@ -51,9 +51,6 @@ class ActorController extends Controller
      */
     public function topAction($max = 5, $displayActorsFound = false)
     {
-        /*$max = 3;
-        $displayActorsFound = false;*/
-
         $actors = $this->getActorManager()->findBy([], ['birthday'=> 'asc'], $max);
 
         return [
