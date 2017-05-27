@@ -105,8 +105,6 @@ class MovieType extends AbstractType
                 ) {
                     $data->setImage(null);
                 }
-
-
             }
         );
     }

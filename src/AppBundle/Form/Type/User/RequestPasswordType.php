@@ -35,32 +35,32 @@ class RequestPasswordType extends AbstractType
         $builder->addEventListener(
             FormEvents::POST_SUBMIT,
             function (FormEvent $event) {
-            $data = $event->getData();
+                $data = $event->getData();
 
-            if (!$data instanceof RequestPassword) {
-                throw new \RuntimeException('RequestPassword instance required.');
-            }
-            $identifier = $data->getIdentifier();
-            $form = $event->getForm();
+                if (!$data instanceof RequestPassword) {
+                    throw new \RuntimeException('RequestPassword instance required.');
+                }
+                $identifier = $data->getIdentifier();
+                $form = $event->getForm();
 
-            if (!$identifier || count($form->getErrors(true))) {
-                return;
-            }
-
-            $user = $this->handler->getUserByIdentifier($identifier);
-
-            if (null == $user) {
-                $form->get('identifier')->addError(new FormError('User not present in our database'));
-                return;
-            } else {
-                $data->setUser($user);
-
-                if ($user->getIsAlreadyRequested() && null != $user->getConfirmationToken()) {
-                    $form->get('identifier')->addError(new FormError('You already requested for a new password'));
+                if (!$identifier || count($form->getErrors(true))) {
                     return;
                 }
+
+                $user = $this->handler->getUserByIdentifier($identifier);
+
+                if (null == $user) {
+                    $form->get('identifier')->addError(new FormError('User not present in our database'));
+                    return;
+                } else {
+                    $data->setUser($user);
+
+                    if ($user->getIsAlreadyRequested() && null != $user->getConfirmationToken()) {
+                        $form->get('identifier')->addError(new FormError('You already requested for a new password'));
+                        return;
+                    }
+                }
             }
-        }
         );
     }
 

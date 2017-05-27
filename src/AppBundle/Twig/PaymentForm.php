@@ -27,7 +27,6 @@ class PaymentForm extends \Twig_Extension
     {
         $this->paymentManagerService = $paymentManagerService;
         $this->defaultPaymentOrganism = ucfirst($configPayment['default']);
-
     }
 
     public function getFunctions()

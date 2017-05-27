@@ -43,7 +43,6 @@ class ActorRepository extends AbstractGenericRepository implements ActorReposito
         $qb = $this->getBuilder('a');
         $qb
             ->where("a.firstName LIKE :motcle OR a.lastName LIKE :motcle")
-            ->orderBy('a.lastName', 'ASC')
             ->setParameter('motcle', '%' . $motcle . '%');
 
         return $qb;

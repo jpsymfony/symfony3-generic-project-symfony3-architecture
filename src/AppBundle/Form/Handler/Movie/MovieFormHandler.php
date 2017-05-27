@@ -154,7 +154,7 @@ class MovieFormHandler
                 if (in_array($key, Movie::getCollectionFields())) {
                     $normalizedKey = Movie::getManagerName($key);
                     $objectManager = $this->managerService->getManagerClass($normalizedKey . 'Manager');
-                    foreach($val as $keyCollection => $valCollection) {
+                    foreach ($val as $keyCollection => $valCollection) {
                         $attributes[$key][$keyCollection] = $objectManager->find($valCollection);
                     }
                     $form->get($key)->setData($attributes[$key]);

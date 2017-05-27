@@ -22,7 +22,7 @@ class I18nExtension extends \Twig_Extension
     public function priceFilter($number, $decimals = 0, $decPoint = '.', $thousandsSep = ',')
     {
         $price = number_format($number, $decimals, $decPoint, $thousandsSep);
-        return '$'.$price;
+        return $price . ' €';
     }
 
     public static function get($locale)

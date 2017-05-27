@@ -10,7 +10,7 @@
             <tag name="app.payment_services"/>
         </service>
 
-        <service id="app.paypal_payment_service_"
+        <service id="app.paypal_payment_service"
                  class="AppBundle\Services\Paypal" lazy="true">
             <tag name="app.payment_services"/>
         </service>

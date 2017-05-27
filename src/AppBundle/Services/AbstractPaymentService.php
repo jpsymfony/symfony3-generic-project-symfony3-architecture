@@ -26,5 +26,4 @@ abstract class AbstractPaymentService implements GenericPaymentServiceInterface
      * @inheritDoc
      */
     abstract function getLabel();
-
 }
