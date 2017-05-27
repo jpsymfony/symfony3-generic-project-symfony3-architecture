@@ -28,8 +28,8 @@ class LoadMovieData extends AbstractFixture implements OrderedFixtureInterface
         $hashTag5 = $manager->getRepository("AppBundle:HashTag")->findOneByName("#HashTag 5");
         $hashTag6 = $manager->getRepository("AppBundle:HashTag")->findOneByName("#HashTag 6");
 
-        $author1 = $manager->getRepository("AppUserBundle:User")->findOneByEmail("editor1@symfony.com");
-        $author2 = $manager->getRepository("AppUserBundle:User")->findOneByEmail("editor2@symfony.com");
+        $author1 = $manager->getRepository("AppBundle:User")->findOneByEmail("editor1@symfony.com");
+        $author2 = $manager->getRepository("AppBundle:User")->findOneByEmail("editor2@symfony.com");
 
         $movie1 = new Movie();
         $movie1->setTitle('Léon');
