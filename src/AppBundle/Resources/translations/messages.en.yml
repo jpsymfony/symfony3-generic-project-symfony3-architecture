@@ -56,14 +56,13 @@ menu:
     choisir_langue: Choose a language
 
 contact:
-    suggestion_newsletter: Do you have some extra information you wished to tell us ? For instance reduced mobility, <br/> hearing problems or sight difficulties in sitting position...
-    center_discover: How did you find our website ?
+    knowledge: How did you find our website ?
     internet.knowledge: Internet
     facebook.knowledge: Facebook
     pubpapier.knowledge: Printed advertisements
     boucheaoreille.knowledge: Word of mouth
-    newspaper: Newspapers
-    network: Social networks
+    newspaper.knowledge: Newspapers
+    network.knowledge: Social networks
     autre.knowledge: Other
     first_name: First name
     last_name: Last name
