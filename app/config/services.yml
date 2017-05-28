@@ -1,11 +1,4 @@
 services:
-    kernel.listener.console_terminate_dispatch:
-            class: Jpsymfony\CoreBundle\EventListener\ErrorLoggerListener
-            arguments:
-                logger: '@logger'
-            tags:
-                - { name: kernel.event_listener, event: console.terminate }
-
     #mywebsite_formatter:
     #        class: Symfony\Bridge\Monolog\Formatter\ConsoleFormatter
     #        arguments:
