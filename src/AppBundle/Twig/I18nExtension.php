@@ -10,11 +10,6 @@ class I18nExtension extends \Twig_Extension
         'fr'    => 'h',
     );
 
-    public function __construct($defaultLocale)
-    {
-        \Locale::setDefault($defaultLocale);
-    }
-
     public function getFilters()
     {
         return array(

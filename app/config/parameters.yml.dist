@@ -17,7 +17,6 @@ parameters:
 
     # A secret key that's used to generate certain security-related tokens
     secret:            ThisTokenIsNotSoSecretChangeIt
-    token_ttl: 86400
     email_from: no-reply@symfony.com
     switch_language_authorized: true
     all_locales:

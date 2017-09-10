@@ -15,7 +15,7 @@ class ActorRepository extends AbstractGenericRepository implements ActorReposito
         $qb = $this->getQueryResultFilter($motcle);
         $qb->select('COUNT(a.id)');
 
-        return $qb->getQuery()->getResult();
+        return $qb->getQuery()->getSingleScalarResult();
     }
 
     /**

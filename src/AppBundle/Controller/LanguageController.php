@@ -40,6 +40,7 @@ class LanguageController extends Controller
         }
 
         $response = new RedirectResponse($url, 302);
+        //TODO
 
         return $response;
     }
