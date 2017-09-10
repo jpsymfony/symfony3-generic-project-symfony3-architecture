@@ -35,7 +35,6 @@
         </service>-->
 
         <service id="app.user_kernel_controller" class="AppBundle\EventListener\KernelController">
-            <argument type="service" id="security.authorization_checker"/>
             <argument type="service" id="security.token_storage"/>
             <argument type="service" id="router"/>
             <argument type="service" id="jpsymfony.entity_management_guesser"/>

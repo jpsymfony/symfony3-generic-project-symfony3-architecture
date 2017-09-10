@@ -10,7 +10,7 @@
         <p>(mis à jour le {{ movie.updatedAt | localizeddate('medium', 'none')}} à {{ movie.updatedAt|date("h:i") }})</p>
         <div class="movie-metadata">
             <table class="metadata table table-bordered">
-                <tr><th>{{ 'film.horaire' | trans }}</th><td> {{ '14h-16h' }} 5.5 €</td></tr>
+                <tr><th>{{ 'film.horaire' | trans }}</th><td> {{ '14h-16h' }} {{ '5.5'| price(10, '.') }}</td></tr>
                 <tr><th>{{ 'film.dateSortie' | trans }}</th><td>{{ movie.releasedAt | date("d/m/Y") }}</td></tr>
                 <tr>
                     <th>{{ 'film.categorie'|trans }}</th>

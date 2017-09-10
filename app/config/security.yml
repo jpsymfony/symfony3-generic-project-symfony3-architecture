@@ -87,9 +87,9 @@ security:
     access_control:
         - { path: ^/account/register, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/account, roles: IS_AUTHENTICATED_FULLY }
-        - { path: ^/back/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/back/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/back/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/back, role: ROLE_SUPER_ADMIN }
+        - { path: ^/back/login$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/back/register, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/back/resetting, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/back, roles: ROLE_SUPER_ADMIN }
         - { path: ^/admin, roles: [ROLE_ADMIN, ROLE_EDITOR] }
-        - { path: ^/, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/, roles: IS_AUTHENTICATED_ANONYMOUSLY }

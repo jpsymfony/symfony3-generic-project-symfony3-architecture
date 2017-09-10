@@ -35,6 +35,7 @@ class ContactType extends AbstractType
                 'expanded' => true,
                 'multiple' => false,
                 'placeholder' => false,
+                'label' => 'contact.knowledge',
             ))
             ->add('other', TextType::class, array('label' => 'contact.autre'))
             ->add('Envoyer', SubmitType::class, array(

@@ -10,6 +10,11 @@ class I18nExtension extends \Twig_Extension
         'fr'    => 'h',
     );
 
+    public function __construct($defaultLocale)
+    {
+        \Locale::setDefault($defaultLocale);
+    }
+
     public function getFilters()
     {
         return array(
@@ -42,11 +47,11 @@ class I18nExtension extends \Twig_Extension
             throw new \Exception('You did not used a separator such as -');
         }
 
-        $tempDayPart        = self::constructDayPart($daypartParts);
+        $tempDayPart = self::constructDayPart($daypartParts);
         return implode('-', $tempDayPart);
     }
 
-    private static function constructDayPart($daypartParts)
+    private static function constructDayPart(array $daypartParts)
     {
         $tempDayPart = array();
 

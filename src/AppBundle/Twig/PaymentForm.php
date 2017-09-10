@@ -23,10 +23,22 @@ class PaymentForm extends \Twig_Extension
      */
     private $paymentManagerService;
 
+    /**
+     * PaymentForm constructor.
+     *
+     * @param PaymentManagerService $paymentManagerService
+     * @param array $configPayment
+     */
     public function __construct(PaymentManagerService $paymentManagerService, $configPayment)
     {
         $this->paymentManagerService = $paymentManagerService;
         $this->defaultPaymentOrganism = ucfirst($configPayment['default']);
+
+        if (!isset($configPayment[$this->defaultPaymentOrganism])) {
+            throw new NotFoundResourceException('no configPayment for ' . $this->defaultPaymentOrganism);
+        }
+
+        $this->url = $configPayment[$this->defaultPaymentOrganism]['url'];
     }
 
     public function getFunctions()
@@ -34,20 +46,6 @@ class PaymentForm extends \Twig_Extension
         return array(
             new \Twig_SimpleFunction('payment_form', array($this ,'getPaymentForm')),
         );
-    }
-
-    public function getName()
-    {
-        return 'payment_form';
-    }
-
-    public function setUrl($configPayment)
-    {
-        if (!isset($configPayment[$this->defaultPaymentOrganism])) {
-            throw new NotFoundResourceException('no configPayment for ' . $this->defaultPaymentOrganism);
-        }
-
-        $this->url = $configPayment[$this->defaultPaymentOrganism]['url'];
     }
 
     public function getPaymentForm($values, $displaySubmitBtn, $message)

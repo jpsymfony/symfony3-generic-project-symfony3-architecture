@@ -2,8 +2,9 @@
 
 namespace AppBundle\EventListener;
 
-use Jpsymfony\CoreBundle\Services\EntityManagementGuesser;
+use AppBundle\Controller\User\UserController;
 use AppBundle\Controller\ContactController;
+use Jpsymfony\CoreBundle\Services\EntityManagementGuesser;
 use Liip\ImagineBundle\Controller\ImagineController;
 use Symfony\Bundle\AsseticBundle\Controller\AsseticController;
 use Symfony\Bundle\FrameworkBundle\Controller\RedirectController;
@@ -17,11 +18,6 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
 
 class KernelController
 {
-    /**
-     * @var AuthorizationChecker $authorizationChecker
-     */
-    private $authorizationChecker;
-
     /**
      * @var RouterInterface $router
      */
@@ -38,13 +34,11 @@ class KernelController
     private $entityManagementGuesser;
 
     public function __construct(
-        AuthorizationChecker $authorizationChecker,
         TokenStorageInterface $tokenStorage,
         RouterInterface $router,
         EntityManagementGuesser $entityManagementGuesser
     )
     {
-        $this->authorizationChecker = $authorizationChecker;
         $this->tokenStorage = $tokenStorage;
         $this->router = $router;
         $this->entityManagementGuesser = $entityManagementGuesser;
@@ -68,8 +62,9 @@ class KernelController
             $this->entityManagementGuesser->inizialize($controllers[0]);
             $bundle = $this->entityManagementGuesser->getBundleShortName();
 
-            if ('AppBundle' == $bundle) {
-                if ($controllers[0] instanceof ContactController) {
+            if ('AppBundleController' == $bundle) {
+                if ($controllers[0] instanceof ContactController
+                    || $controllers[0] instanceof UserController) {
                     return;
                 }
 
@@ -77,20 +72,6 @@ class KernelController
 
                 if (!is_object($user)) {
                     return;
-                }
-
-                $roles = $user->getRoles();
-                $role  = $roles[0];
-
-                if ('ROLE_VISITOR' === $role) {
-                    $cgvRead = $user->isCgvRead();
-                    if (!$cgvRead) {
-                        $redirectRoute = 'sales_conditions';
-                        $redirectUrl = $this->router->generate($redirectRoute);
-                        $event->setController(function() use ($redirectUrl) {
-                            return new RedirectResponse($redirectUrl);
-                        });
-                    }
                 }
             }
         }
