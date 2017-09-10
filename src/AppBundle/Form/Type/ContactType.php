@@ -51,5 +51,4 @@ class ContactType extends AbstractType
             'csrf_protection' => false,
         ));
     }
-
 }
