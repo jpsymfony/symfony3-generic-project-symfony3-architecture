@@ -44,7 +44,7 @@ class MovieController extends Controller
 
     /**
      * @Template("movie/partials/movies.html.twig", vars={"movies"})
-     * @ParamConverter("movies", converter="project_collection_converter", options={"manager":"app.movie.manager", "orderby":"title", "dir":"desc"})
+     * @ParamConverter("movies", converter="project_collection_converter", options={"manager":"app.movie.manager", "orderBy":"title", "dir":"desc"})
      * @param ArrayCollection $movies
      * @param int $max
      */
@@ -76,7 +76,6 @@ class MovieController extends Controller
      * @param Movie|null $movie
      * @return array|RedirectResponse
      * @ParamConverter("movie", class="AppBundle:Movie")
-     * @Security("has_role('ROLE_EDITOR')")
      */
     public function newEditAction(Request $request, Movie $movie = null)
     {

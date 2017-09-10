@@ -38,6 +38,12 @@ monolog:
             max_files:      15
             path:           "%kernel.logs_dir%/%kernel.environment%.error.log"
             level:          info
+        security:
+            # log all messages (since debug is the lowest level)
+            level:    debug
+            type:     stream
+            path:     '%kernel.logs_dir%/security.log'
+            channels: [security]
         streamed_critical:
             type:           rotating_file
             max_files:      15
@@ -57,7 +63,7 @@ assetic:
 
 app:
    payment_organisms:
-       default: Paypal
+       default: Be2bill
        Be2bill:
            identifier: MYWEBSITE
            password: 123456789

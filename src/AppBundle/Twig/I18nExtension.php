@@ -19,22 +19,27 @@ class I18nExtension extends \Twig_Extension
         );
     }
 
+    /**
+     * @param string $number
+     * @param int $decimals
+     * @param string $decPoint
+     * @param string $thousandsSep
+     *
+     * @return string
+     */
     public function priceFilter($number, $decimals = 0, $decPoint = '.', $thousandsSep = ',')
     {
         $price = number_format($number, $decimals, $decPoint, $thousandsSep);
         return $price . ' €';
     }
 
-    public static function get($locale)
-    {
-        return (self::$format[$locale])? : self::$format[self::$fallback];
-    }
-
-    public static function getDefault()
-    {
-        return self::get(\Locale::getDefault());
-    }
-
+    /**
+     * @param string $time
+     * @param string $format
+     *
+     * @return string
+     * @throws \Exception
+     */
     public static function formatTime($time, $format = ':')
     {
         $timeParts = explode($format, $time);
@@ -46,6 +51,27 @@ class I18nExtension extends \Twig_Extension
         return $timeParts[0] . self::getDefault() . $timeParts[1];
     }
 
+    public static function getDefault()
+    {
+        return self::get(\Locale::getDefault());
+    }
+
+    /**
+     * @param string $locale
+     *
+     * @return mixed
+     */
+    public static function get($locale)
+    {
+        return (self::$format[$locale])? : self::$format[self::$fallback];
+    }
+
+    /**
+     * @param string $daypart
+     *
+     * @return string
+     * @throws \Exception
+     */
     public static function formatSingleDayPart($daypart)
     {
         $daypartParts = explode('-', $daypart);
@@ -54,11 +80,16 @@ class I18nExtension extends \Twig_Extension
             throw new \Exception('You did not used a separator such as -');
         }
 
-        $tempDayPart        = self::constructDayPart($daypartParts);
+        $tempDayPart = self::constructDayPart($daypartParts);
         return implode('-', $tempDayPart);
     }
 
-    private static function constructDayPart($daypartParts)
+    /**
+     * @param array $daypartParts
+     *
+     * @return array
+     */
+    private static function constructDayPart(array $daypartParts)
     {
         $tempDayPart = array();
 

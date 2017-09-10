@@ -4,6 +4,14 @@ namespace AppBundle\Services;
 
 class Be2bill extends AbstractPaymentService
 {
+    /**
+     * @param string $url
+     * @param array $parameters
+     * @param $displaySubmitBtn
+     * @param $message
+     *
+     * @return string
+     */
     public function getHtml($url, $parameters, $displaySubmitBtn, $message)
     {
         return 'Be2BillServiceForm';

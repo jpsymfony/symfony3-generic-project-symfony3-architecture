@@ -59,10 +59,6 @@ class MovieVoter extends Voter
 
     private function canEdit(Movie $movie, UserInterface $user)
     {
-        if (!is_object($user)) {
-            return false;
-        }
-
         if ($movie->getAuthor() === $user) {
             return true;
         }

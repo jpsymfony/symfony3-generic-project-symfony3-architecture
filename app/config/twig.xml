@@ -11,9 +11,6 @@
         <service id="app.twig.payment_form_extension" class="AppBundle\Twig\PaymentForm">
             <argument type="service" id="app.payment_manager_service" />
             <argument>%app.payment_organisms%</argument>
-            <call method="setUrl">
-                <argument>%app.payment_organisms%</argument>
-            </call>
             <tag name="twig.extension" />
         </service>
     </services>

@@ -8,11 +8,11 @@ use AppBundle\Services\ManagerContainerService;
 interface ManagerServiceInterface
 {
     /**
-     * @param $paymentClassLabel
-     * @return GenericPaymentServiceInterface $paymentService
+     * @param $managerClassLabel
+     * @return ManagerServiceInterface $managerService
      * @throws \Exception
      */
-    public function getManagerClass($paymentClassLabel);
+    public function getManagerClass($managerClassLabel);
 
     /**
      * @param ManagerContainerService $managerContainerService

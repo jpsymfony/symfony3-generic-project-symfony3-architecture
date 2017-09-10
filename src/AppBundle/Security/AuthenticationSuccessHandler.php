@@ -22,7 +22,7 @@ class AuthenticationSuccessHandler extends DefaultAuthenticationSuccessHandler
     public function onAuthenticationSuccess(Request $request, TokenInterface $token)
     {
         $user = $token->getUser();
-        $this->logger->info("User ".$user->getId()." has been logged", array('user' => $user));
+        $this->logger->info("User " . $user->getId() . " has been logged", ['user' => $user]);
 
         $response = parent::onAuthenticationSuccess($request, $token);
         $response->headers->setCookie(new Cookie('success_connection', $token->getUsername(), 0));

@@ -47,7 +47,7 @@ class ActorController extends Controller
 
     /**
      * @Template("actor/partials/actors.html.twig", vars={"actors", "displayActorsFound"})
-     * @ParamConverter("actors", converter="project_collection_converter", options={"manager":"app.actor.manager", "orderby":"birthday"})
+     * @ParamConverter("actors", converter="project_collection_converter", options={"manager":"app.actor.manager", "orderBy":"birthday"})
      */
     public function topAction(ArrayCollection $actors, $max = 5, $displayActorsFound = false)
     {
