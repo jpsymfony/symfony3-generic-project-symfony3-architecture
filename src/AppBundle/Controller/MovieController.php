@@ -56,14 +56,23 @@ class MovieController extends Controller
      * @Route("/movies/{id}/show", name="movie_show")
      * @ParamConverter("movie", class="AppBundle:Movie")
      * @param Movie $movie
+     * @param Request $request
      * @return Response
      * @Security("has_role('ROLE_VISITOR')")
-     * @Cache(smaxage=600)
+     * @Cache(public=true, etag="movie.getTitle() ~ movie.getDescription()", lastModified="movie.getUpdatedAt()", maxage=86400, smaxage=86400)
      */
-    public function showAction(Movie $movie)
+    public function showAction(Request $request, Movie $movie)
     {
         $response = new Response();
-        $response->setEtag(md5($movie->getId() . $movie->getUpdatedAt()->format('YmdHis') . microtime(true)));
+        //$response->setEtag(md5('W/' . $movie->getId() . $movie->getUpdatedAt()->format('YmdHis')));
+        //$response->setEtag(md5($movie->getTitle() . $movie->getDescription()));
+        //$response->setLastModified($movie->getUpdatedAt());
+        //$response->setPublic();
+
+        if ($response->isNotModified($request)) {
+            // envoie la réponse 304 tout de suite
+            return $response;
+        }
 
         return $this->render('movie/show.html.twig', ['movie' => $movie], $response);
     }
