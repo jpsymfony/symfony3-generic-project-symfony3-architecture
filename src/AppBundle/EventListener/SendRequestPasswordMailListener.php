@@ -2,13 +2,13 @@
 
 namespace AppBundle\EventListener;
 
-use Jpsymfony\CoreBundle\Services\Interfaces\MailerServiceInterface;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
-use Twig_Environment;
-use Symfony\Component\Routing\RouterInterface;
-use Symfony\Component\Security\Csrf\TokenGenerator\TokenGeneratorInterface;
 use AppBundle\Event\UserDataEvent;
 use AppBundle\Entity\Manager\Interfaces\UserManagerInterface;
+use Jpsymfony\CoreBundle\Services\Interfaces\MailerServiceInterface;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Component\Routing\RouterInterface;
+use Symfony\Component\Security\Csrf\TokenGenerator\TokenGeneratorInterface;
+use Twig_Environment;
 
 class SendRequestPasswordMailListener
 {
@@ -23,13 +23,11 @@ class SendRequestPasswordMailListener
     protected $templating;
 
     /**
-     *
      * @var RouterInterface $router
      */
     protected $router;
 
     /**
-     *
      * @var TokenGeneratorInterface $tokenGenerator
      */
     protected $tokenGenerator;

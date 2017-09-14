@@ -16,16 +16,16 @@ class RequestPasswordType extends AbstractType
 {
     /**
      *
-     * @var UserManagerInterface $handler
+     * @var UserManagerInterface $userManager
      */
-    private $handler;
+    private $userManager;
 
     /**
      * @param UserManagerInterface $userManager
      */
     public function __construct(UserManagerInterface $userManager)
     {
-        $this->handler = $userManager;
+        $this->userManager = $userManager;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -47,15 +47,15 @@ class RequestPasswordType extends AbstractType
                     return;
                 }
 
-                $user = $this->handler->getUserByIdentifier($identifier);
+                $user = $this->userManager->getUserByIdentifier($identifier);
 
-                if (null == $user) {
+                if (null === $user) {
                     $form->get('identifier')->addError(new FormError('User not present in our database'));
                     return;
                 } else {
                     $data->setUser($user);
 
-                    if ($user->getIsAlreadyRequested() && null != $user->getConfirmationToken()) {
+                    if ($user->getIsAlreadyRequested() && null !== $user->getConfirmationToken()) {
                         $form->get('identifier')->addError(new FormError('You already requested for a new password'));
                         return;
                     }

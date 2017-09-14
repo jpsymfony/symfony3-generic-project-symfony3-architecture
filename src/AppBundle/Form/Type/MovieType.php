@@ -21,16 +21,16 @@ class MovieType extends AbstractType
 {
     /**
      *
-     * @var MovieManagerInterface $handler
+     * @var MovieManagerInterface $manager
      */
-    private $handler;
+    private $manager;
 
     /**
      * @param MovieManagerInterface $movieManager
      */
     public function __construct(MovieManagerInterface $movieManager)
     {
-        $this->handler = $movieManager;
+        $this->manager = $movieManager;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -84,8 +84,7 @@ class MovieType extends AbstractType
             'label' => 'valider'
         ));
 
-       $builder->addEventListener(
-            FormEvents::POST_SUBMIT,
+       $builder->addEventListener(FormEvents::POST_SUBMIT,
             function (FormEvent $event) {
                 // object movie data from the form
                 $data = $event->getData();
@@ -96,12 +95,12 @@ class MovieType extends AbstractType
 
                 $dbMovie = null;
                 if (null !== $data->getId()) {
-                    $dbMovie = $this->handler->find($data->getId());
+                    $dbMovie = $this->manager->find($data->getId());
                 }
 
                 // if movie creation or no image in database for updated movie AND no file uploaded, we set image attribute to null
-                if ((null === $dbMovie || null === $dbMovie->getImage()->getId()) &&
-                    null === $event->getForm()->getData()->getImage()->getFile()
+                if ((null === $dbMovie || null === $dbMovie->getImage()->getId())
+                    && null === $data->getImage()->getFile()
                 ) {
                     $data->setImage(null);
                 }

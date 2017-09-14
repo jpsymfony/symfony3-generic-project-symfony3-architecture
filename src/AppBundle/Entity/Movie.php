@@ -30,11 +30,6 @@ class Movie implements TraitDatetimeInterface, TraitSimpleInterface, TraitEnable
     private static $likeFieldsSearchForm = ['title', 'description', 'releaseDateFrom', 'releaseDateTo'];
     private static $collectionFields = ['hashTags', 'actors'];
     private static $objectFields = ['category'];
-    private static $managerCollectionMapping =
-        [
-            'actors' => 'actor',
-            'hashTags' => 'hashTag',
-        ];
 
     /**
      * @ORM\Column(type="string",length=255)
@@ -366,14 +361,6 @@ class Movie implements TraitDatetimeInterface, TraitSimpleInterface, TraitEnable
     public static function getObjectFields()
     {
         return self::$objectFields;
-    }
-
-    /**
-     * @return array
-     */
-    public static function getManagerCollectionMapping()
-    {
-        return self::$managerCollectionMapping;
     }
 
     public static function getManagerName($class)

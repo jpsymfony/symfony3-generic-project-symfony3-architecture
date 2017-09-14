@@ -18,9 +18,9 @@ class ResetPasswordType extends AbstractType
 {
     /**
      *
-     * @var UserManagerInterface $handler
+     * @var UserManagerInterface $userManager
      */
-    private $handler;
+    private $userManager;
 
     /**
      *
@@ -35,7 +35,7 @@ class ResetPasswordType extends AbstractType
      */
     public function __construct(UserManagerInterface $userManager, RequestStack $request)
     {
-        $this->handler = $userManager;
+        $this->userManager = $userManager;
         $this->request = $request;
     }
     
@@ -67,10 +67,10 @@ class ResetPasswordType extends AbstractType
                 $token = $this->request->getCurrentRequest()->get('token');
 
                 if (!$token) {
-                   throw new \Exception('Incorrect Token.');
+                   throw new \Exception('Missing Token.');
                 }
 
-                $user = $this->handler->getUserByConfirmationToken($token);
+                $user = $this->userManager->getUserByConfirmationToken($token);
 
                 if (!$user) {
                    throw new \Exception('User not identified in our database with this token.');

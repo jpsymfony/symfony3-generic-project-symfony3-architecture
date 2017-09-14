@@ -19,22 +19,21 @@ class ChangePasswordType extends AbstractType
      *
      * @var UserManagerInterface $handler
      */
-    private $handler;
+    private $userManager;
 
     /**
      * @param UserManagerInterface $userManager
      */
     public function __construct(UserManagerInterface $userManager)
     {
-        $this->handler = $userManager;
+        $this->userManager = $userManager;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('oldPassword', PasswordType::class, ['required' => false, 'label' => 'user.change_password.old_password' ])
+            ->add('oldPassword', PasswordType::class, ['label' => 'user.change_password.old_password' ])
             ->add('newPassword', RepeatedType::class, [
-                'required' => false,
                 'type' => PasswordType::class,
                 'first_options' => [
                     'label' => 'user.change_password.new_password',
@@ -62,7 +61,7 @@ class ChangePasswordType extends AbstractType
     
                 $user = $data->getUser();
     
-                if (!$this->handler->isPasswordValid($user, $oldPassword)) {
+                if (!$this->userManager->isPasswordValid($user, $oldPassword)) {
                     $form = $event->getForm();
                     $form->get('oldPassword')->addError(new FormError('Previous password is not valid.'));
                     return;

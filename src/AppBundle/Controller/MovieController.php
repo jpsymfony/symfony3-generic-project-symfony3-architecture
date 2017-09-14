@@ -31,9 +31,10 @@ class MovieController extends Controller
 
         $requestVal = $request->query->all();
         $limit = $this->getParameter('app.max_movies_per_page');
+        $currentRequestVal = current($requestVal);
 
-        $movies = $this->getMovieManager()->getResultFilterPaginated(current($requestVal), $limit, ($page - 1) * $limit);
-        $nbFilteredMovies = $this->getMovieManager()->getResultFilterCount(current($requestVal));
+        $movies = $this->getMovieManager()->getResultFilterPaginated($currentRequestVal, $limit, ($page - 1) * $limit);
+        $nbFilteredMovies = $this->getMovieManager()->getResultFilterCount($currentRequestVal);
         $pagination = $this->getMovieManager()->getPagination($requestVal, $page, 'movie_list', $limit, $nbFilteredMovies);
 
         return [

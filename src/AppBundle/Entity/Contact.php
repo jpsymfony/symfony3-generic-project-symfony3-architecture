@@ -2,9 +2,9 @@
 
 namespace AppBundle\Entity;
 
+use AppBundle\Validator\Constraints as CoreAssert;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
-use AppBundle\Validator\Constraints as CoreAssert;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 class Contact
