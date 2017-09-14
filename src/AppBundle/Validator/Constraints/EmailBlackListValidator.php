@@ -4,6 +4,7 @@ namespace AppBundle\Validator\Constraints;
 
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
+use Symfony\Component\Validator\Exception\UnexpectedTypeException;
 
 class EmailBlackListValidator extends ConstraintValidator
 {
@@ -19,6 +20,10 @@ class EmailBlackListValidator extends ConstraintValidator
      */
     public function validate($value, Constraint $constraint)
     {
+        if (!$constraint instanceof EmailBlackList) {
+            throw new UnexpectedTypeException($constraint, EmailBlackList::class);
+        }
+
         $domainArray = preg_split("/@/", $value);
         if (count($domainArray) > 1) {
             $domain = $domainArray[1];
