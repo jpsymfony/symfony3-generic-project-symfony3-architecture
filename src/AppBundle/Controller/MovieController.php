@@ -31,9 +31,9 @@ class MovieController extends Controller
 
         $requestVal = $request->query->all();
         $limit = $this->getParameter('app.max_movies_per_page');
+        $currentRequestVal = current($requestVal);
 
         // really dirty but will be removed with the datepicker
-        $currentRequestVal = current($requestVal);
         if (!empty($currentRequestVal['releaseDateFrom']) && is_array($currentRequestVal['releaseDateFrom'])) {
             $currentRequestVal['releaseDateFrom'] = (new \DateTime($currentRequestVal['releaseDateFrom']['year'] . '-' . $currentRequestVal['releaseDateFrom']['month'] . '-' . $currentRequestVal['releaseDateFrom']['day']))->format('Y-m-d');
         }
