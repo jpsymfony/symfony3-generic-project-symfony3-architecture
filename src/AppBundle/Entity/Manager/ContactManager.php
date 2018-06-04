@@ -1,19 +1,14 @@
 <?php
 namespace AppBundle\Entity\Manager;
 
-use Jpsymfony\CoreBundle\Services\Interfaces\MailerServiceInterface;
 use AppBundle\Entity\Contact;
 use AppBundle\Entity\Manager\Interfaces\ContactManagerInterface;
 use AppBundle\Entity\Manager\Interfaces\ManagerInterface;
+use Jpsymfony\CoreBundle\Services\Interfaces\MailerServiceInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 
 class ContactManager implements ContactManagerInterface, ManagerInterface
 {
-    /**
-     * @var \Swift_Mailer
-     */
-    protected $mailer;
-
     /**
      * @var \Twig_Environment
      */

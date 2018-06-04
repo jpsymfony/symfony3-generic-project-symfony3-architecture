@@ -18,7 +18,7 @@ class SendConfirmationMailListener
     protected $templating;
 
     /**
-     * @var array
+     * @var string
      */
     protected $template;
 
@@ -30,8 +30,8 @@ class SendConfirmationMailListener
     /**
      * @param MailerServiceInterface $mailerService
      * @param \Twig_Environment $templating
-     * @param $template
-     * @param $from
+     * @param string $template
+     * @param string $from
      */
     public function __construct(MailerServiceInterface $mailerService, \Twig_Environment $templating, $template, $from)
     {

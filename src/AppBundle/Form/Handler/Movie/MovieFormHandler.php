@@ -31,12 +31,12 @@ class MovieFormHandler
     private $movieFormHandlerStrategy;
 
     /**
-     * @var MovieFormHandlerStrategy $newActorFormHandlerStrategy
+     * @var MovieFormHandlerStrategy $newMovieFormHandlerStrategy
      */
     protected $newMovieFormHandlerStrategy;
 
     /**
-     * @var MovieFormHandlerStrategy $updateActorFormHandlerStrategy
+     * @var MovieFormHandlerStrategy $updateMovieFormHandlerStrategy
      */
     protected $updateMovieFormHandlerStrategy;
 

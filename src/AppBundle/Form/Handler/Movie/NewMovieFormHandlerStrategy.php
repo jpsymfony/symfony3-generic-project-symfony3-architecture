@@ -56,6 +56,4 @@ class NewMovieFormHandlerStrategy extends AbstractMovieFormHandlerStrategy
                 '%titre%' => $movie->getTitle()
             ));
     }
-
-
 }

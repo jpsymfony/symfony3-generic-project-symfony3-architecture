@@ -30,6 +30,11 @@ class Movie implements TraitDatetimeInterface, TraitSimpleInterface, TraitEnable
     private static $likeFieldsSearchForm = ['title', 'description', 'releaseDateFrom', 'releaseDateTo'];
     private static $collectionFields = ['hashTags', 'actors'];
     private static $objectFields = ['category'];
+    private static $managerCollectionMapping =
+        [
+            'actors'   => 'actor',
+            'hashTags' => 'hashTag',
+        ];
 
     /**
      * @ORM\Column(type="string",length=255)
@@ -102,7 +107,7 @@ class Movie implements TraitDatetimeInterface, TraitSimpleInterface, TraitEnable
 
     public function __construct()
     {
-        $this->actors = new ArrayCollection();
+        $this->actors   = new ArrayCollection();
         $this->hashTags = new ArrayCollection();
     }
 
@@ -120,6 +125,7 @@ class Movie implements TraitDatetimeInterface, TraitSimpleInterface, TraitEnable
      * Set title
      *
      * @param string $title
+     *
      * @return Movie
      */
     public function setTitle($title)
@@ -144,6 +150,7 @@ class Movie implements TraitDatetimeInterface, TraitSimpleInterface, TraitEnable
      * Set slug
      *
      * @param string $slug
+     *
      * @return Movie
      */
     public function setSlug($slug)
@@ -167,6 +174,7 @@ class Movie implements TraitDatetimeInterface, TraitSimpleInterface, TraitEnable
      * Set description
      *
      * @param string $description
+     *
      * @return Movie
      */
     public function setDescription($description)
@@ -190,6 +198,7 @@ class Movie implements TraitDatetimeInterface, TraitSimpleInterface, TraitEnable
      * Set category
      *
      * @param Category $category
+     *
      * @return Movie
      */
     public function setCategory(Category $category = null)
@@ -213,6 +222,7 @@ class Movie implements TraitDatetimeInterface, TraitSimpleInterface, TraitEnable
      * Add actors
      *
      * @param Actor $actors
+     *
      * @return Movie
      */
     public function addActor(Actor $actors)
@@ -253,11 +263,12 @@ class Movie implements TraitDatetimeInterface, TraitSimpleInterface, TraitEnable
      * Add hashTags
      *
      * @param \AppBundle\Entity\HashTag $hashTag
+     *
      * @return Movie
      */
     public function addHashTag(\AppBundle\Entity\HashTag $hashTag)
     {
-        if (!$this->hashTags->contains($hashTag)) {
+        if ( ! $this->hashTags->contains($hashTag)) {
             $this->hashTags->add($hashTag);
             $hashTag->setMovie($this);
         }
@@ -285,6 +296,7 @@ class Movie implements TraitDatetimeInterface, TraitSimpleInterface, TraitEnable
 
     /**
      * @param mixed $image
+     *
      * @return Movie
      */
     public function setImage($image)
@@ -304,6 +316,7 @@ class Movie implements TraitDatetimeInterface, TraitSimpleInterface, TraitEnable
 
     /**
      * @param mixed $author
+     *
      * @return Movie
      */
     public function setAuthor($author)
@@ -323,11 +336,13 @@ class Movie implements TraitDatetimeInterface, TraitSimpleInterface, TraitEnable
 
     /**
      * @param \DateTime $releasedAt
+     *
      * @return Movie
      */
     public function setReleasedAt($releasedAt)
     {
         $this->releasedAt = $releasedAt;
+
         return $this;
     }
 
@@ -365,8 +380,13 @@ class Movie implements TraitDatetimeInterface, TraitSimpleInterface, TraitEnable
 
     public static function getManagerName($class)
     {
-        if (!array_key_exists($class, static::$managerCollectionMapping)) {
-            throw new \Exception('Method getManagerName() expects the parameter ' . $class . ' to be one of ' . implode('Manager, ', array_keys(static::$managerCollectionMapping)));
+        if ( !array_key_exists($class, static::$managerCollectionMapping)) {
+            throw new \Exception(
+                'Method getManagerName() expects the parameter '.$class.' to be one of '.implode(
+                    'Manager, ',
+                    array_keys(static::$managerCollectionMapping)
+                )
+            );
         }
 
         return static::$managerCollectionMapping[$class];

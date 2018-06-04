@@ -23,7 +23,7 @@ class ManagerService implements ManagerServiceInterface
             }
         }
 
-        throw new \Exception('None manager service found for class ' . $managerClassLabel);
+        throw new \Exception(sprintf('None manager service found for class %s', $managerClassLabel));
     }
 
     /**
