@@ -1,6 +1,3 @@
-DNL
-===
-
 #SANS DOCKER:
 - Lancer un make build et le projet s'installera (js&css, bdd, fixtures, serveur)
 - Le site est accessible via l'uri: http://127.0.0.1:8000
