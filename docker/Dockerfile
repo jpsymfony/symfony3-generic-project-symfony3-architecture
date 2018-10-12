@@ -9,7 +9,6 @@ RUN buildDeps=" \
     && apt-get update \
     && apt-get install -y --no-install-recommends \
         $buildDeps \
-        libicu52 \
         zlib1g \
     && rm -rf /var/lib/apt/lists/* \
     && docker-php-ext-install \
@@ -28,7 +27,7 @@ RUN pecl install \
 
 COPY config/xdebug.ini /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
 
-RUN apt-get update && apt-get install -y zlib1g-dev libicu-dev g++
+RUN apt-get update && apt-get install -y g++
 
 RUN pecl install xdebug && docker-php-ext-enable xdebug
 

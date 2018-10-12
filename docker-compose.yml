@@ -1,13 +1,18 @@
 version: '2'
 
 services:
+    debian_jessie:
+        image: debian:jessie
+        volumes:
+            - ./:/var/www/project
+
     php_70:
         container_name: php_70
         build: docker
-        volumes:
-            - ./:/var/www/project
         volumes_from:
             - debian_jessie
+        extra_hosts:
+            - 'localhost formation-symfony3-niveau2-end.fr:127.0.0.1'
         ports:
             - 80:80
         links:
