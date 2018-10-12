@@ -1,34 +1,41 @@
-#SANS DOCKER:
-build: install init
-
-install:
-	cp app/config/parameters.yml.dist app/config/parameters.yml
-	./bin/console assetic:dump
+build_docker: init build up
 
 init:
-	php bin/console doctrine:database:create
-	php bin/console doctrine:schema:create
-	php bin/console doctrine:fixtures:load -n
-	php bin/console server:start
+	cp app/config/parameters.yml.dist app/config/parameters.yml
 
-
-#AVEC DOCKER:
-build_docker: up init_docker ssh
+build:
+	docker-compose build --build-arg USER=${USER} --build-arg UID=${UID} php_70
 
 up:
 	docker-compose up -d
 
-init_docker:
-	docker exec -i php_70 bash -c 'php bin/console doctrine:database:create && php bin/console doctrine:schema:create && php bin/console doctrine:fixtures:load -n'
-
-rebuild:
-	docker-compose build --no-cache
-
 ssh:
 	docker exec -it php_70 bash
+
+install:
+	docker exec -u=${USER} -i php_70 bash -c 'make composer'
+	docker exec -u=${USER} -i php_70 bash -c 'make setfacl'
+	docker exec -u=${USER} -i php_70 bash -c 'make assetic'
+	docker exec -u=${USER} -i php_70 bash -c 'make database'
+
+composer:
+	curl -sS https://getcomposer.org/installer | php -- --install-dir=bin --filename=composer
+	chmod +x bin/composer || /bin/true
+	./bin/composer self-update
+	./bin/composer install --no-interaction -o
+
+setfacl:
+	setfacl -dR -m u:"www-data":rwX -m u:$(whoami):rwX var
+	setfacl -R -m u:"www-data":rwX -m u:$(whoami):rwX var
+
+assetic:
+	php bin/console assetic:dump
+
+database:
+	php bin/console doctrine:database:create && php bin/console doctrine:schema:create && php bin/console doctrine:fixtures:load -n
 
 stop:
 	docker-compose stop
 
 cache:
-	docker exec -i php_70 bash -c 'bin/console cache:clear --no-warmup && bin/console cache:warmup && chmod -R 777 var/cache var/logs var/sessions'
+	docker exec -u=${USER} -i php_70 bash -c 'bin/console cache:clear --no-warmup && bin/console cache:warmup'
